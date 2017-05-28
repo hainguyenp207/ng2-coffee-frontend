@@ -12,24 +12,21 @@ export class AuthenticationService {
   login(username: string, password: string) {
     return this.http.post(`${this.backendAPI}/api/v1/login`, JSON.stringify({ username: username, password: password }))
       .map((response: Response) => {
-        console.log("Data:", response.headers)
-        // login successful if there's a jwt token in the response
-        let user = response.json();
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
+        let token = response.headers.get("x-authorization");
+        if (token) {
+          localStorage.setItem("token", token);
         }
       });
   }
 
   logout() {
     // remove user from local storage to log user out
-    var token = localStorage.getItem("currentUser");
+    var token = localStorage.getItem("token");
+    localStorage.removeItem('token');
     return this.http.post('/api/v1/logout', JSON.stringify({ token: token }))
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        let user = response.json();
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
       });
 
   }
