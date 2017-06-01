@@ -15,6 +15,7 @@ export class AuthenticationService {
         let token = response.headers.get("x-authorization");
         if (token) {
           localStorage.setItem("token", token);
+          localStorage.setItem("data", JSON.stringify(response.json()));
         }
       });
   }
@@ -23,6 +24,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     var token = localStorage.getItem("token");
     localStorage.removeItem('token');
+    localStorage.removeItem('data');
     return this.http.post('/api/v1/logout', JSON.stringify({ token: token }))
       .map((response: Response) => {
         // login successful if there's a jwt token in the response

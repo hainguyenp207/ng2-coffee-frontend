@@ -148,7 +148,20 @@
             <ul class="dropdown-menu">
               <li><a [routerLink]="['/profile']"><i class="ti-user m-r-10 text-custom"></i> Cá nhân</a></li>
               <li class="divider"></li>
-              <li><a href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Đăng xuất</a></li>
+
+              <li *ngFor="let permission of permissions">
+                <a href="javascript:void(0)" (click)="setOrganization(permission.organization.id)">
+                <i class="m-r-10 text-danger "></i> 
+                {{permission.organization.name}}
+                </a>
+              </li>
+              <li class="divider "></li>
+              <li>
+                <a href="javascript:void(0) ">
+                <i class="ti-power-off m-r-10 text-danger "></i> 
+                Đăng xuất
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

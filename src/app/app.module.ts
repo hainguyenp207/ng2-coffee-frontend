@@ -26,6 +26,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { ModalModule } from 'ngx-bootstrap';
 import { ActivityDetailComponent } from './activity/components/activity-detail/activity-detail.component';
 import { Daterangepicker } from 'ng2-daterangepicker';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { Daterangepicker } from 'ng2-daterangepicker';
     FooterComponent,
     ProfileComponent,
     ActivityDetailComponent
+
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { Daterangepicker } from 'ng2-daterangepicker';
     InlineEditorModule,
     ToastyModule.forRoot(),
     ModalModule.forRoot(),
-    Daterangepicker
+    Daterangepicker,
+    MomentModule
   ],
   providers: [
     AuthenticationService,

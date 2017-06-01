@@ -1,17 +1,22 @@
 <div class="col-md-12">
   <div class="card-box">
+    <ng2-toasty [position]="'top-right'"></ng2-toasty>
     <div class="row">
       <form id="basic-form" action="#">
         <div role="application" class="wizard clearfix" id="steps-uid-0">
           <div class="content clearfix">
             <h3 id="steps-uid-0-h-0" tabindex="-1" class="title current">Hoạt động</h3>
             <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false">
-              <form role="form" (ngSubmit)="f.form.valid && createActivity()" #f="ngForm" novalidate>
+              <form role="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 
                 <div class="form-group clearfix">
                   <label class="col-lg-2 control-label " for="name">Tên hoạt động</label>
                   <div class="col-lg-10">
-                    <input class="form-control required" id="name" name="name" type="text">
+                    <input [(ngModel)]="data.name" class="form-control required" [ngClass]="{ 'parsley-error': (hasErrorField('name')) }" name="name"
+                      id="name" type="text">
+                    <ul *ngIf="(hasErrorField('name'))" class="parsley-errors-list filled" id="parsley-id-5">
+                      <li class="parsley-required">Tên hoạt động không được để trống.</li>
+                    </ul>
                   </div>
                 </div>
                 <div class="form-group clearfix">
@@ -21,17 +26,39 @@
                       name="daterange">
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group clearfix">
+                      <label class="col-lg-4 control-label " for="confirm">Điểm rèn luyện</label>
+                      <div class="col-lg-8">
+                        <input [(ngModel)]="data.pointTranning" type="text" class="form-control" name="pointTranning" value="0">
+                        <ul *ngIf="(hasError('data.pointTranning'))" class="parsley-errors-list filled" id="parsley-id-5">
+                          <li class="parsley-required">Tên đăng nhập không được để trống.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group clearfix">
+                      <label class="col-lg-4 control-label " for="confirm">Điểm CTXH</label>
+                      <div class="col-lg-8">
+                        <input type="text" [(ngModel)]="data.pointSocial" class="form-control" name="pointSocial" value="0">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="form-group clearfix">
-                  <label class="col-lg-2 control-label " for="confirm">Nội dung</label>
+                  <label class="col-lg-2 control-label" for="confirm">Nội dung</label>
                   <div class="col-lg-10">
-                    <textarea id="description" name="area" aria-hidden="true"></textarea>
+                    <textarea id="description" [(ngModel)]="data.description" name="description" aria-hidden="true"></textarea>
                   </div>
                 </div>
                 <div class="form-group text-right m-b-0">
                   <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
 											 Bỏ qua
 											</button>
-                  <button class="btn btn-primary waves-effect waves-light" type="submit">
+                  <button (click)="createActivity()" class="btn btn-primary waves-effect waves-light" type="submit">
 											Lưu
 											</button>
                 </div>

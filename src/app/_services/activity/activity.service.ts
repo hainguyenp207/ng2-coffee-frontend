@@ -28,7 +28,7 @@ export class ActivityService {
     }
 
     create(activity: Activity) {
-        return this.http.post(this.backendAPI, activity, this.jwt()).map((response: Response) => response.json());
+        return this.http.post(this.backendAPI, activity, this.jwt()).map((response: Response) => response);
     }
 
     update(activity: Activity) {

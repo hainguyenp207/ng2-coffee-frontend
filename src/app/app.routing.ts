@@ -15,7 +15,8 @@ const appRoutes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'users', component: UsersComponent },
     { path: 'activities', component: ActivityComponent },
-    { path: 'activities/:id', component: ActivityDetailComponent },
+    { path: 'activities/new', component: ActivityDetailComponent },
+    { path: 'activities/edit/:id', component: ActivityDetailComponent },
     // { path: 'register', component: RegisterComponent },
 
     // otherwise redirect to home

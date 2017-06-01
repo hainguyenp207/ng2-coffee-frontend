@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 @Component({
   selector: 'app-root',
@@ -8,4 +8,13 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 })
 export class AppComponent {
   title = 'app works!';
+  authentication = {};
+  ngOnInit() {
+    let data = localStorage.getItem("data");
+    if (data) {
+      this.authentication = JSON.parse(data);
+    }
+  }
+
 }
+
