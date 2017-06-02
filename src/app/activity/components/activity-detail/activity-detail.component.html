@@ -1,5 +1,6 @@
 <div class="col-md-12">
   <div class="card-box">
+    <loading-animate></loading-animate>
     <ng2-toasty [position]="'top-right'"></ng2-toasty>
     <div class="row">
       <form id="basic-form" action="#">
@@ -32,9 +33,6 @@
                       <label class="col-lg-4 control-label " for="confirm">Điểm rèn luyện</label>
                       <div class="col-lg-8">
                         <input [(ngModel)]="data.pointTranning" type="text" class="form-control" name="pointTranning" value="0">
-                        <ul *ngIf="(hasError('data.pointTranning'))" class="parsley-errors-list filled" id="parsley-id-5">
-                          <li class="parsley-required">Tên đăng nhập không được để trống.</li>
-                        </ul>
                       </div>
                     </div>
                   </div>
@@ -58,8 +56,9 @@
                   <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
 											 Bỏ qua
 											</button>
-                  <button (click)="createActivity()" class="btn btn-primary waves-effect waves-light" type="submit">
+                  <button [disabled]="isLoading()" (click)="submitActivity()" class="btn btn-primary waves-effect waves-light" type="submit">
 											Lưu
+                      <i [hidden]="!isLoading()" style="margin-left: 5px;" class="fa fa-spinner fa-spin fa-lg"></i>
 											</button>
                 </div>
               </form>

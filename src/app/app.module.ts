@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { animate } from '@angular/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -27,6 +29,12 @@ import { ModalModule } from 'ngx-bootstrap';
 import { ActivityDetailComponent } from './activity/components/activity-detail/activity-detail.component';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { MomentModule } from 'angular2-moment';
+import { NgSpinKitModule } from 'ng-spin-kit';
+import {
+  LoadingAnimateModule, LoadingAnimateService,
+
+} from 'ng2-loading-animate';
+import { CfToastComponent } from './components/cf-toast/cf-toast.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +50,13 @@ import { MomentModule } from 'angular2-moment';
     ActivityComponent,
     FooterComponent,
     ProfileComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    CfToastComponent
 
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     routing,
@@ -55,14 +65,18 @@ import { MomentModule } from 'angular2-moment';
     ToastyModule.forRoot(),
     ModalModule.forRoot(),
     Daterangepicker,
-    MomentModule
+    MomentModule,
+    NgSpinKitModule,
+    LoadingAnimateModule.forRoot()
   ],
   providers: [
     AuthenticationService,
     AlertService,
     UserService,
     OrganizationService,
-    ActivityService
+    ActivityService,
+    LoadingAnimateService,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })

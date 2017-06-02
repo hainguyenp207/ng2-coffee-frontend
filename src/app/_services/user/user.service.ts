@@ -20,23 +20,23 @@ export class UserService {
     }
 
     getAll() {
-        return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response);
     }
 
     getById(id: number) {
-        return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
     create(user: User) {
-        return this.http.post(this.backendAPI, user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post(this.backendAPI, user, this.jwt()).map((response: Response) => response);
     }
 
     update(user: User) {
-        return this.http.put(this.backendAPI + user.username, user, this.jwt()).map((response: Response) => response.json());
+        return this.http.put(this.backendAPI + user.username, user, this.jwt()).map((response: Response) => response);
     }
 
     delete(id: string) {
-        return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
     // private helper methods

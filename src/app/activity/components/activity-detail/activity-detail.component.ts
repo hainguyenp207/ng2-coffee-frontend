@@ -11,10 +11,11 @@ import {
 import { Activity } from '../../../_models/index';
 import { ActivityService, OrganizationService } from '../../../_services/index';
 import { DaterangePickerComponent } from 'ng2-daterangepicker';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 import { Subject, Observable, Subscription } from 'rxjs/Rx';
-// import *  from 'ng2-toasty/style-material.css'
+import { LoadingAnimateService } from 'ng2-loading-animate';
+
 import 'tinymce';
 import 'tinymce/themes/modern';
 import 'tinymce/plugins/paste';
@@ -42,8 +43,9 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
   isSubmited: boolean = false;
   listFieldError: any = [];
   public daterange: any = {};
-  id: number;
+  id: string;
   private sub: any;
+  loadingSubmit: boolean = false;
 
   @ViewChild(DaterangePickerComponent)
   private picker: DaterangePickerComponent;
@@ -57,31 +59,39 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     private organizationService: OrganizationService,
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private _loadingSvc: LoadingAnimateService
   ) {
     this.toastyConfig.theme = 'material';
   }
 
   ngOnInit() {
     this.active = JSON.parse(localStorage.getItem("active"));
-    if (this.route.url) {
-      console.log(this.route);
-    }
-    this.sub = this.route.params.subscribe(params => {
-      console.log(params); this.id = +params['id']; // (+) converts string 'id' to a number
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd) {
+        if (val.url.includes("/activities/edit")) {
+          this.typeComponent = "edit";
+          this.sub = this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.fetchActivity(this.id);
+          });
 
-      // In a real app: dispatch action to load the details here.
-    });
-    console.log(this.id + "...." + this.route.params)
-    this.organizationService.getAll().subscribe(
-      data => {
-        this.organizations = data;
-      },
-      error => {
-        console.log(error);
-        if (error.status == 401) {
+        } else {
+          this.typeComponent = "new";
         }
-      });
+      }
+    });
+
+    // this.organizationService.getAll().subscribe(
+    //   data => {
+    //     this.organizations = data;
+    //   },
+    //   error => {
+    //     if (error.status == 401) {
+    //     }
+    //   });
   }
   ngAfterViewInit() {
     tinymce.init({
@@ -101,6 +111,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnDestroy() {
     tinymce.remove(this.editor);
   }
+
 
   // see original project for full list of options
   // can also be setup using the config service to apply to multiple pickers
@@ -138,19 +149,115 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
       case 'warning': this.toastyService.warning(toastOptions); break;
     }
   }
-
+  isLoading() {
+    return this.isSubmited;
+  }
   hasError(data, regex, type) {
-    if (this.isSubmited)
-      switch (type) {
-        case "notblank": if (!data) return true; break;
-        case "regex": return !regex.test(data);
-      }
+    switch (type) {
+      case "notblank": if (!data) return true; break;
+      case "regex": return !regex.test(data);
+    }
     return false;
   }
   hasErrorField(nameField) {
     return this.listFieldError.indexOf(nameField) == -1 ? false : true;
   }
-  createActivity() {
+  fetchActivity(id: string) {
+    this.activityService.getById(id).subscribe(
+      data => {
+        let dataJs = data.json();
+        if (data.status === 200) {
+          this.data.id = dataJs.id;
+          this.data.name = dataJs.name;
+          this.data.description = dataJs.description;
+          this.daterange.pointSocial = dataJs.pointSocial;
+          this.daterange.pointTranning = dataJs.pointTranning;
+          this.picker.datePicker.setStartDate(dataJs.startDate);
+          this.picker.datePicker.setEndDate(dataJs.endDate);
+        }
+      },
+      error => {
+        switch (error.status) {
+          case 401: {
+            this.addToast("Bạn chưa đăng nhập, vui long dang nhap lai", 2000, "error");
+            setTimeout(() => {
+              this.router.navigateByUrl("/login");
+            }, 3000);
+          } break;
+          case 404: {
+            this.addToast("Không tìm thấy hoạt động", 200, "error");
+            setTimeout(() => {
+              this.router.navigateByUrl("/activities");
+            }, 2000);
+          }
+        }
+      });
+
+  }
+  createActivity(activity: Activity) {
+    this.activityService.create(activity).subscribe(
+      data => {
+        let dataJS = data.json();
+        if (data.status === 201) {
+          this.addToast("Hoạt động đã được tạo", 2000, "success");
+        } else
+          if (dataJS.code != 0) {
+            this.addToast(dataJS.message, 4000, "error");
+          }
+        this.isSubmited = false;
+      },
+      error => {
+        if (error.status == 400) {
+          let errorSV = error.json();
+          errorSV.detail.forEach(element => {
+            this.addToast(element.message, 5000, "error");
+          });
+        } else {
+          let errorSV = error.json();
+          if (errorSV) {
+            if (errorSV.code) {
+              let message = errorSV.message;
+              this.addToast(message, 4000, "error");
+            }
+          }
+        }
+        this.isSubmited = false;
+      })
+  }
+  updateActivity(activity: Activity, id: string) {
+    activity.id = id;
+    this.activityService.update(activity).subscribe(
+      data => {
+        let dataJS = data.json();
+        if (data.status === 200) {
+          this.addToast("Hoạt động đã được cập nhập", 2000, "success");
+          this.fetchActivity(id);
+        } else
+          if (dataJS.code != 0) {
+            this.addToast(dataJS.message, 4000, "error");
+          }
+        this.isSubmited = false;
+      },
+      error => {
+        if (error.status == 400) {
+          let errorSV = error.json();
+          errorSV.detail.forEach(element => {
+            this.addToast(element.message, 5000, "error");
+          });
+        } else {
+          let errorSV = error.json();
+          if (errorSV) {
+            if (errorSV.code) {
+              let message = "Mã lỗi: " + errorSV.code + " Chi tiết: " + errorSV.message;
+              this.addToast(message, 4000, "error");
+            }
+          }
+        }
+
+        this.isSubmited = false;
+      });
+  }
+  submitActivity() {
     let organizationId = localStorage.getItem("active");
 
     if (!this.daterange.start) {
@@ -159,6 +266,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     if (!this.daterange.end) {
       this.daterange.end = Date.now();
     }
+
     let activity: Activity = {
       name: this.data.name,
       description: this.editor.getContent(),
@@ -171,7 +279,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     };
     let inputs = ["name"];
 
-    this.isSubmited = true;
+
     this.hasFieldError = false;
     this.listFieldError = [];
     inputs.forEach(input => {
@@ -180,48 +288,14 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.hasFieldError = true;
       }
     })
-    if (!this.hasFieldError) {
-      this.activityService.create(activity).subscribe(
-        data => {
-          let dataJS = data.json();
-          if (data.status === 201) {
-            this.addToast("Hoạt động đã được tạo", 2000, "success");
-          } else
-            if (dataJS.code != 0) {
-              this.addToast(dataJS.message, 4000, "error");
-            }
-        },
-        error => {
-          if (error.status == 401) {
-            console.log("Chua dang nhap");
-          }
-          if (error.status == 400) {
-            let errorSV = error.json();
-            errorSV.detail.forEach(element => {
-              this.addToast(element.message, 5000, "error");
-            });
-          } else {
-            let errorSV = error.json();
-            if (errorSV) {
-              if (errorSV.code) {
-                let message = "Mã lỗi: " + errorSV.code + " Chi tiết: " + errorSV.message;
-                this.addToast(message, 4000, "error");
-              }
-            }
-          }
-        });
-    }
 
-  }
-  updateActivity() {
-    this.activityService.update(null).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        if (error.status == 401) {
-          console.log("Chua dang nhap");
-        }
-      });
+    if (!this.hasFieldError) {
+      this.isSubmited = true;
+      if (this.typeComponent == "edit") {
+        this.updateActivity(activity, this.id);
+      } else if (this.typeComponent == "new") {
+        this.createActivity(activity);
+      }
+    }
   }
 }

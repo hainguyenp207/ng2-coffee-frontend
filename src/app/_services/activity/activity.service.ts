@@ -23,8 +23,8 @@ export class ActivityService {
         return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response.json());
     }
 
-    getById(id: number) {
-        return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response.json());
+    getById(id: string) {
+        return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
     create(activity: Activity) {
@@ -32,11 +32,11 @@ export class ActivityService {
     }
 
     update(activity: Activity) {
-        return this.http.put(this.backendAPI + activity.id, activity, this.jwt()).map((response: Response) => response.json());
+        return this.http.put(this.backendAPI + activity.id, activity, this.jwt()).map((response: Response) => response);
     }
 
     delete(id: string) {
-        return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
     // private helper methods
