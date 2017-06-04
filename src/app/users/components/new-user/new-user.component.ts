@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { UserService, OrganizationService, RoleService } from "../../../_services/index";
 import { User } from "../../../_models/index";
 import { CfToastComponent } from '../../../components/cf-toast/cf-toast.component';
@@ -10,7 +10,7 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.css']
 })
-export class NewUserComponent implements OnInit {
+export class NewUserComponent implements OnInit, OnChanges {
   users = null;
   user: any = {};
   orgs = null;
@@ -61,11 +61,6 @@ export class NewUserComponent implements OnInit {
             this.addToast(message, 4000, "error");
           }
         }
-        // if (error.status == 401) {
-        //   setTimeout(() => {
-        //     this.router.navigateByUrl("/login");
-        //   }, 3000);
-        // }
       });
     this.roleService.getAll().subscribe(
       data => {
@@ -86,7 +81,9 @@ export class NewUserComponent implements OnInit {
         }
       });
   }
-
+  ngOnChanges(changes) {
+    console.log(changes);
+  }
   addToast(message, timeOut, type) {
     // Or create the instance of ToastOptions
     var toastOptions: ToastOptions = {
@@ -108,7 +105,16 @@ export class NewUserComponent implements OnInit {
   }
 
   createUser() {
-    this.userService.create(this.user).subscribe(
+    var data = {
+      username: this.user.username,
+      name: this.user.name,
+      email: this.user.email,
+      password: this.user.password,
+      userOrgForm: this.dataRoles,
+      facultyid: 'facultyid'
+    }
+
+    this.userService.create(data).subscribe(
       data => {
         console.log(data);
       },
@@ -118,22 +124,57 @@ export class NewUserComponent implements OnInit {
         }
       });
   }
-  addRole() {
-    let roleSelected = this.dataRole;
 
-    this.dataRoles.push(roleSelected);
+  checkDulicateOrg(orgId: string) {
+    let duplicate = false;
+    this.dataRoles.forEach(orgRole => {
+      if (orgRole.organizationId === orgId)
+        duplicate = true
+    });
+    if (duplicate) {
+      this.addToast("Tài khoản đã tồn tại vai trò trong tổ chức này", 3000, "error");
+    }
+    return duplicate;
+  }
+  addRole(selectedRole, selectedOrg) {
+    let roleSelected = {
+      roleId: selectedRole.value,
+      organizationId: selectedOrg.value
+    };
+    let error = false;
+    if (roleSelected.roleId == "") {
+      this.addToast("Bạn chưa chọn vai trò ", 2000, "error");
+      error = true;
+    }
+    if (roleSelected.organizationId == "") {
+      this.addToast("Bạn chưa chọn Tổ chức", 2000, "error");
+      error = true;
+    }
+    //console.log(this.checkDulicateOrg(roleSelected.orgId), error)
+    if (!this.checkDulicateOrg(roleSelected.organizationId) && !error)
+      this.dataRoles.push(roleSelected);
   }
   getRoleName(roleId: string) {
-    let roleSelected = this.roles.filter(role => {
-      return role["id"] === roleId;
+    let role = this.roles.filter(role => {
+      return role.id === roleId;
     });
-    return roleSelected[0].name;
+    return role[0].name;
   }
   getOrgName(orgId: string) {
+    console.log(orgId)
     let orgSelected = this.orgs.filter(org => {
-      return org["id"] === orgId;
+      return org.id === orgId;
     });
+    console.log(orgSelected)
     return orgSelected[0].name;
   }
-
+  trackByFn(index, item) {
+    return index;
+  }
+  removeRole(index: number) {
+    this.dataRoles.splice(index, 1);
+  }
+  redirect(pagename: string) {
+    this.router.navigate(['/' + pagename]);
+  }
 }

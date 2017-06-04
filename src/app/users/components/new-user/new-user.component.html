@@ -1,9 +1,10 @@
 <div class="col-md-12">
   <div class="card-box">
+    <ng2-toasty [position]="'bottom-left'"></ng2-toasty>
     <div class="custom-modal-text text-left">
-      <form role="form" (ngSubmit)="f.form.valid && createUser()" #f="ngForm" novalidate>
+      <form role="form" #f="ngForm" novalidate>
         <div class="form-group">
-          <label for="name">Tên dăng nhập</label>
+          <label for="name">Tên đăng nhập</label>
           <div class="input-group">
             <input type="text" name="username" class="form-control" [ngClass]="{ 'parsley-error': f.submitted}" [(ngModel)]="user.username"
               id="username" placeholder="Nhập tên đăng nhập">
@@ -31,7 +32,7 @@
         <div class="form-group">
           <label for="exampleInputEmail1">Mật khẩu</label>
           <div class="input-group">
-            <input type="password" class="form-control" placeholder="Nhập mật khẩu">
+            <input [(ngModel)]="user.password" name="password" type="password" class="form-control" placeholder="Nhập mật khẩu">
             <span class="input-group-addon bg-custom b-0 text-white"><i class="fa fa-key"></i></span>
           </div>
         </div>
@@ -40,7 +41,7 @@
             <div class="form-group">
               <label>Tổ chức</label>
 
-              <select [(ngModel)]="dataRole.orgId" name="orgId" class="form-control selectpicker" data-style="btn-white">
+              <select #selectedOrg name="orgId" class="form-control selectpicker" data-style="btn-white">
                 <option *ngFor="let org of orgs" value="{{org.id}}">{{org.name}}</option>
               </select>
 
@@ -49,7 +50,7 @@
           <div class="col-md-5 col-xs-5">
             <div class="form-group">
               <label for="status">Vai trò</label>
-              <select [(ngModel)]="dataRole.roleId" name="roleId" class="form-control selectpicker" data-style="btn-white">
+              <select #selectedRole name="roleId" class="form-control selectpicker" data-style="btn-white">
                            <option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</option>
                           
                        </select>
@@ -57,7 +58,7 @@
           </div>
           <div class="col-md-2 col-xs-2">
             <div class="form-group" style="padding-top: 24px">
-              <button type="button" (click)="addRole()" class="btn btn-primary form-control">
+              <button type="button" (click)="addRole(selectedRole,selectedOrg)" class="btn btn-primary form-control">
                   Thêm
               </button>
             </div>
@@ -66,26 +67,33 @@
 
         </div>
         <div class="row" *ngIf="dataRoles.length>0">
-          <table class="table m-0">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tổ chức</th>
-                <th>Vai trò</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let roleSelecte of dataRoles">
-                <h1>{{roleSelecte.roleId}}</h1>
-                <th scope="row">{{index}}</th>
-                <td>{{getOrgName(roleSelecte.orgId)}}</td>
-                <td>{{getRoleName(roleSelecte.roleId)}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-md-12 col-ms-12">
+            <table class="table m-0">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tổ chức</th>
+                  <th>Vai trò</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of dataRoles; let i = index; trackBy:trackByFn">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{getOrgName(x.organizationId)}}</td>
+                  <td>{{getRoleName(x.roleId)}}</td>
+                  <td><button (click)="removeRole(x)" class="btn btn-primary">Xóa</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <button type="submit" class="btn btn-default waves-effect waves-light">Lưu</button>
-        <button type="button" class="btn btn-danger waves-effect waves-light m-l-10" (click)="lgModal.hide()">Hủy</button>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-default waves-effect waves-light">Lưu</button>
+            <button (click)="redirect(users)" class="btn btn-danger waves-effect waves-light m-l-10">Hủy</button>
+          </div>
+        </div>
       </form>
 
     </div>
