@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, OrganizationService, RoleService } from "../_services/index";
-import { User } from "../_models/index";
-import { CfToastComponent } from '../components/cf-toast/cf-toast.component';
+import { UserService, OrganizationService, RoleService } from "../../../_services/index";
+import { User } from "../../../_models/index";
+import { CfToastComponent } from '../../../components/cf-toast/cf-toast.component';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-new-user',
+  templateUrl: './new-user.component.html',
+  styleUrls: ['./new-user.component.css']
 })
-
-export class UsersComponent implements OnInit {
+export class NewUserComponent implements OnInit {
   users = null;
   user: any = {};
   orgs = null;
@@ -122,7 +121,7 @@ export class UsersComponent implements OnInit {
   addRole() {
     let roleSelected = this.dataRole;
 
-    this.dataRoles.push(this.dataRole);
+    this.dataRoles.push(roleSelected);
   }
   getRoleName(roleId: string) {
     let roleSelected = this.roles.filter(role => {
@@ -136,5 +135,5 @@ export class UsersComponent implements OnInit {
     });
     return orgSelected[0].name;
   }
-}
 
+}

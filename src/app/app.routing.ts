@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
+import { NewUserComponent } from './users/components/new-user/new-user.component';
 import { ActivityComponent } from './activity/activity.component';
 import { ActivityDetailComponent } from './activity/components/activity-detail/activity-detail.component';
 // import { RegisterComponent } from './register/index';
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'users', component: UsersComponent },
+    { path: 'users/new', component: NewUserComponent },
     { path: 'activities', component: ActivityComponent },
     { path: 'activities/new', component: ActivityDetailComponent },
     { path: 'activities/edit/:id', component: ActivityDetailComponent },
