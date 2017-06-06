@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { User } from '../../_models/index';
+import { Organization } from '../../_models/index';
 import { BACKEND_SERVICE_HOST, BACKEND_SERVICE_PORT } from '../../_constants/config-envoriment';
 
 @Injectable()
@@ -20,23 +20,23 @@ export class OrganizationService {
     }
 
     getAll() {
-        return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response);
     }
 
-    getById(id: number) {
-        return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response.json());
+    getById(id: string) {
+        return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
-    create(user: User) {
-        return this.http.post(this.backendAPI, user, this.jwt()).map((response: Response) => response.json());
+    create(org: Organization) {
+        return this.http.post(this.backendAPI, org, this.jwt()).map((response: Response) => response);
     }
 
-    update(user: User) {
-        return this.http.put(this.backendAPI + user.username, user, this.jwt()).map((response: Response) => response.json());
+    update(org: Organization) {
+        return this.http.put(this.backendAPI + org.id, org, this.jwt()).map((response: Response) => response);
     }
 
     delete(id: string) {
-        return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
     // private helper methods

@@ -23,7 +23,7 @@ export class UserService {
         return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response);
     }
 
-    getById(id: number) {
+    getById(id: string) {
         return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 

@@ -4,13 +4,15 @@ import { User } from "../../../_models/index";
 import { CfToastComponent } from '../../../components/cf-toast/cf-toast.component';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { InlineEditorComponent } from 'ng2-inline-editor';
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.css']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class NewUserComponent implements OnInit, OnChanges {
+export class EditUserComponent implements OnInit {
+
   users = null;
   user: any = {};
   orgs = null;
@@ -19,6 +21,8 @@ export class NewUserComponent implements OnInit, OnChanges {
   rolesUser: any = [];
   dataRole: any = {};
   dataRoles: any = [];
+  private sub: any;
+  private id: any;
   constructor(
     private userService: UserService,
     private orgService: OrganizationService,
@@ -27,31 +31,27 @@ export class NewUserComponent implements OnInit, OnChanges {
     private toastyConfig: ToastyConfig,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd) {
+        if (val.url.includes("/users/edit")) {
+          this.sub = this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.fetchUser(this.id);
+          });
+
+        } else {
+          this.router.navigate(['/users']);
+        }
+      }
+    });
+  }
 
   ngOnInit() {
-    this.userService.getAll().subscribe(
-      data => {
-        this.users = data.json();
-      },
-      error => {
-        let errorSV = error.json();
-        if (errorSV) {
-          if (errorSV.code) {
-            let message = errorSV.message;
-            this.addToast(message, 4000, "error");
-          }
-        }
-        // if (error.status == 401) {
-        //   setTimeout(() => {
-        //     this.router.navigateByUrl("/login");
-        //   }, 3000);
-        // }
-      });
     this.orgService.getAll().subscribe(
       data => {
-        this.orgs = data;
-        console.log("Org", data);
+        this.orgs = data.json();
       },
       error => {
         let errorSV = error.json();
@@ -104,7 +104,10 @@ export class NewUserComponent implements OnInit, OnChanges {
     }
   }
 
-  createUser() {
+  updateUser(value) {
+    this.editUser();
+  }
+  editUser() {
     var data = {
       username: this.user.username,
       name: this.user.name,
@@ -114,23 +117,55 @@ export class NewUserComponent implements OnInit, OnChanges {
       facultyid: 'facultyid'
     }
     console.log(data);
-    this.userService.create(data).subscribe(
+    this.userService.update(data).subscribe(
       data => {
-        if (data.status == 201) {
-          this.addToast("Tài khoản đã được tạo thành cồng", 3000, "success")
+        if (data.status == 200) {
+          this.addToast("Tài khoản đã được cập nhập thành công", 3000, "success")
         }
       },
       error => {
         if (error.status == 401) {
           console.log("Chua dang nhap");
         }
-        if (error.status == 409) {
-          let errorJs = error.json();
-          this.addToast(errorJs.message, 2000, "error");
+        let errorJs = error.json();
+        if (errorJs.message) {
+          this.addToast(errorJs.message, 2000, "error")
         }
       });
   }
+  fetchUser(id: string) {
+    this.userService.getById(id).subscribe(
+      data => {
+        this.user = data.json();
+        this.user.permissions.forEach(permission => {
+          let data = {
+            organizationId: permission.organization.id,
+            roleId: permission.role.id
+          }
+          this.dataRoles.push(data);
+        });
+      },
+      error => {
+        try {
+          let errorSV = error.json();
+          if (error.status == 404) {
+            this.addToast("Tài khoản không tồn tại trong hệ thống", 4000, "error");
+            setTimeout(() => {
+              this.router.navigate(['/users']);
+            }, 3000);
+          } else
+            if (errorSV) {
+              if (errorSV.code) {
+                let message = errorSV.message;
+                this.addToast(message, 4000, "error");
+              }
+            }
+        } catch (e) {
+          this.addToast(e, 3000, "error")
+        }
 
+      });
+  }
   checkDulicateOrg(orgId: string) {
     let duplicate = false;
     this.dataRoles.forEach(orgRole => {
@@ -183,4 +218,5 @@ export class NewUserComponent implements OnInit, OnChanges {
   redirect(pagename: string) {
     this.router.navigate(['/' + pagename]);
   }
+
 }

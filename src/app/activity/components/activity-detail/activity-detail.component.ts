@@ -64,10 +64,6 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     private _loadingSvc: LoadingAnimateService
   ) {
     this.toastyConfig.theme = 'material';
-  }
-
-  ngOnInit() {
-    this.active = JSON.parse(localStorage.getItem("active"));
     this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd) {
@@ -83,6 +79,11 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         }
       }
     });
+  }
+
+  ngOnInit() {
+    this.active = JSON.parse(localStorage.getItem("active"));
+
 
     // this.organizationService.getAll().subscribe(
     //   data => {

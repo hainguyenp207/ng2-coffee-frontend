@@ -32,7 +32,7 @@
           <td>{{user.email}}</td>
           <td>{{user.id}}</td>
           <td>
-            <button id="editUser" class="btn btn-default user">Sửa</button>
+            <a [routerLink]="['/users/edit/',(user.username)]" class="btn btn-default user">Sửa</a>
             <button data-toggle="custom-modal" data-target="#custom-modal" class="btn btn-danger del">Xóa</button>
           </td>
         </tr>

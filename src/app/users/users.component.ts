@@ -108,6 +108,9 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  getLinkEdit(id: string) {
+    return '/users/edit/' + id;
+  }
   createUser() {
     this.userService.create(this.user).subscribe(
       data => {

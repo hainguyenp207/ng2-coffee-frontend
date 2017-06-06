@@ -10,7 +10,8 @@ import { AlertComponent, } from './components/alert/alert.component';
 import { LoginComponent } from './login/login.component';
 import {
   AlertService, AuthenticationService, UserService,
-  OrganizationService, ActivityService, RoleService
+  OrganizationService, ActivityService, RoleService,
+  RegisterService
 
 } from './_services/index';
 import { UsersComponent } from './users/users.component';
@@ -34,8 +35,13 @@ import {
   LoadingAnimateModule, LoadingAnimateService,
 
 } from 'ng2-loading-animate';
+
 import { CfToastComponent } from './components/cf-toast/cf-toast.component';
 import { NewUserComponent } from './users/components/new-user/new-user.component';
+import { EditUserComponent } from './users/components/edit-user/edit-user.component';
+import { OrganizationsComponent } from './organizations/organizations.component';
+import { PointComponent } from './activity/components/point/point.component';
+import { MarkComponent } from './activity/components/mark/mark.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +59,11 @@ import { NewUserComponent } from './users/components/new-user/new-user.component
     ProfileComponent,
     ActivityDetailComponent,
     CfToastComponent,
-    NewUserComponent
+    NewUserComponent,
+    EditUserComponent,
+    OrganizationsComponent,
+    PointComponent,
+    MarkComponent
 
   ],
   imports: [
@@ -78,6 +88,7 @@ import { NewUserComponent } from './users/components/new-user/new-user.component
     RoleService,
     OrganizationService,
     ActivityService,
+    RegisterService,
     LoadingAnimateService,
     BrowserAnimationsModule,
   ],
