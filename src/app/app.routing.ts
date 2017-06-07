@@ -11,6 +11,9 @@ import { ActivityDetailComponent } from './activity/components/activity-detail/a
 import { PointComponent } from './activity/components/point/point.component';
 import { MarkComponent } from './activity/components/mark/mark.component';
 import { OrganizationsComponent } from './organizations/organizations.component';
+import { PointManagementComponent } from './member/point-management/point-management.component'
+import { ActivityManagementComponent } from './member/activity-management/activity-management.component'
+
 // import { RegisterComponent } from './register/index';
 // import { AuthGuard } from './_guards/index';
 
@@ -27,6 +30,8 @@ const appRoutes: Routes = [
     { path: 'activities/points', component: PointComponent },
     { path: 'activities/points/:id', component: ActivityDetailComponent },
     { path: 'activities/points/mark/:idActivity', component: MarkComponent },
+    { path: 'user/point', component: PointManagementComponent },
+    { path: 'user/activities', component: ActivityManagementComponent },
     { path: 'organizations', component: OrganizationsComponent },
     // { path: 'register', component: RegisterComponent },
 

@@ -1,6 +1,13 @@
 <div class="card-box table-responsive">
   <div class="row">
     <div class="col-lg-12">
+      <ng2-toasty [position]="'top-right'"></ng2-toasty>
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <h3>{{activity.name}}</h3>
+          <p>{{activity.startDate}}-{{activity.endDate}}</p>
+        </div>
+      </div>
       <div id="usersDataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
         <div class="row">
           <div class="col-sm-6">
@@ -12,8 +19,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <table id="usersDataTable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="usersDataTable_info"
-              style="width: 951px;">
+            <table id="usersDataTable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="usersDataTable_info">
               <thead>
                 <tr role="row">
                   <th class="sorting_asc" tabindex="0" aria-controls="usersDataTable" rowspan="1" colspan="1" aria-label="ID: activate to sort column descending"

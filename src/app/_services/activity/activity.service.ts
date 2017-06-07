@@ -27,6 +27,11 @@ export class ActivityService {
         return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
+    // Lay danh hoat dong theo user
+    // getActivityByUser(userId: string) {
+    //     return this.http.get(this.backendAPI + "user/" + userId, this.jwt()).map((response: Response) => response);
+
+    // }
     create(activity: Activity) {
         return this.http.post(this.backendAPI, activity, this.jwt()).map((response: Response) => response);
     }

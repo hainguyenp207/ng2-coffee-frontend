@@ -25,9 +25,14 @@ export class RegisterService {
         return this.http.get(this.backendActivity + idActivity + "/registers", this.jwt()).map((response: Response) => response);
     }
 
-    // Chi tiết người đăng ký theo hoạt động
+    // Danh sachs người đăng ký theo hoạt động
     getById(idActivity: string, idRegister: string) {
         return this.http.get(this.backendActivity + idActivity + "/registers/" + idRegister, this.jwt()).map((response: Response) => response);
+    }
+    // Lấy danh sách tất cả hoạt động của 1 user
+    getRegisterByUser(userId: string) {
+        return this.http.get(this.backendRegister + "user/" + userId, this.jwt()).map((response: Response) => response);
+
     }
 
     create(register: Register) {

@@ -42,6 +42,8 @@ import { EditUserComponent } from './users/components/edit-user/edit-user.compon
 import { OrganizationsComponent } from './organizations/organizations.component';
 import { PointComponent } from './activity/components/point/point.component';
 import { MarkComponent } from './activity/components/mark/mark.component';
+import { PointManagementComponent } from './member/point-management/point-management.component';
+import { ActivityManagementComponent } from './member/activity-management/activity-management.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { MarkComponent } from './activity/components/mark/mark.component';
     EditUserComponent,
     OrganizationsComponent,
     PointComponent,
-    MarkComponent
+    MarkComponent,
+    PointManagementComponent,
+    ActivityManagementComponent
 
   ],
   imports: [
