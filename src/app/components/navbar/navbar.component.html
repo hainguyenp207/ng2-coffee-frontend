@@ -4,40 +4,91 @@
       <!--- Divider -->
       <div id="sidebar-menu">
         <ul>
-
           <li class="text-muted menu-title">Điều hướng</li>
+          <!--=== Cán bộ trường === -->
+          <ng-template [ngIf]="currentPermission.roleId=='ADMIN'">
+            <li class="has_sub">
+              <a href="javascript:void(0);" class="waves-effect">
+              <i class="ti-paint-bucket"></i>
+               <span> Quản lý hoạt động </span> 
+               <span class="menu-arrow"></span> 
+               </a>
+              <ul class="list-unstyled">
+                <li><a [routerLink]="['/activities']">Danh sách hoạt động</a></li>
+                <li><a [routerLink]="['/create-activity']">Tạo hoạt động</a></li>
+              </ul>
+            </li>
+            <li class="has_sub">
+              <a [routerLink]="['/admin/checkin']" class="waves-effect">
+            <i class="ti-bar-chart"></i>
+            <span> Quản lý chi đoàn </span></a>
+            </li>
+            <li class="has_sub">
+              <a [routerLink]="['/admin/users']" class="waves-effect">
+            <i class="ti-user"></i> 
+              <span> Quản lý đoàn viên </span>
+             <span class="menu-arrow"></span> 
+             </a>
+            </li>
+          </ng-template>
+          <!-- === Cán bộ đoàn === -->
+          <ng-template [ngIf]="currentPermission.roleId=='CBT'">
+            <li class="has_sub">
+              <a href="javascript:void(0);" class="waves-effect">
+              <i class="ti-paint-bucket"></i>
+               <span> Quản lý hoạt động </span> 
+               <span class="menu-arrow"></span> 
+               </a>
+              <ul class="list-unstyled">
+                <li><a [routerLink]="['/activities']">Danh sách hoạt động</a></li>
+                <li><a [routerLink]="['/create-activity']">Tạo hoạt động</a></li>
+              </ul>
+            </li>
+            <li class="has_sub">
+              <a [routerLink]="['/admin/checkin']" class="waves-effect">
+            <i class="ti-bar-chart"></i>
+            <span> Điểm danh </span></a>
+            </li>
+            <li class="has_sub">
+              <a [routerLink]="['/admin/users']" class="waves-effect">
+            <i class="ti-user"></i> 
+              <span> Quản lý tài khoản </span>
+             <span class="menu-arrow"></span> 
+             </a>
+            </li>
+          </ng-template>
+
+          <!-- === Sinh viên ==== -->
+          <ng-template [ngIf]="currentPermission.roleId=='STUDENT'">
+            <li class="has_sub">
+              <a [routerLink]="['/admin/users']" class="waves-effect">
+            <i class="ti-user"></i> 
+              <span>Danh sách hoạt động </span>
+             <span class="menu-arrow"></span> 
+             </a>
+            </li>
+            <li class="has_sub">
+              <a [routerLink]="['/admin/users']" class="waves-effect">
+            <i class="ti-user"></i> 
+              <span>Điểm CTXH/Rèn luyện </span>
+             <span class="menu-arrow"></span> 
+             </a>
+            </li>
+          </ng-template>
 
           <li class="has_sub">
-            <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+            <a [routerLink]="['/admin/checkin']" class="waves-effect">
+            <i class="ti-bar-chart"></i>
+            <span class="label label-pink pull-right">11</span>
+            <span> Điểm danh </span></a>
           </li>
-
-          <li class="has_sub">
-            <a href="javascript:void(0);" class="waves-effect"><i class="ti-paint-bucket"></i> <span> Quản lý hoạt động </span> <span class="menu-arrow"></span> </a>
-            <ul class="list-unstyled">
-              <li><a href="activities.html">Danh sách hoạt động</a></li>
-              <li><a href="create-activity.html">Tạo hoạt động</a></li>
-
-            </ul>
-          </li>
-          <li class="has_sub">
-            <a [routerLink]="['/admin/users']" class="waves-effect"><i class="ti-user"></i> <span> Quản lý tài khoản </span> <span class="menu-arrow"></span> </a>
-          </li>
-          <li class="has_sub">
-            <a [routerLink]="['/admin/checkin']" class="waves-effect"><i class="ti-bar-chart"></i><span class="label label-pink pull-right">11</span><span> Điểm danh </span></a>
-
-          </li>
-
           <li class="has_sub">
             <a [routerLink]="['/admin/mark']" class="waves-effect"><i class="ti-location-pin"></i><span> Chấm Điểm</span> <span class="menu-arrow"></span></a>
           </li>
-
           <li class="text-muted menu-title">More</li>
-
           <li class="has">
             <a [routerLink]="['/admin/score']" class="waves-effect"><i class="ti-files"></i><span> Điểm </span> <span class="menu-arrow"></span></a>
           </li>
-
-
         </ul>
         <div class="clearfix"></div>
       </div>

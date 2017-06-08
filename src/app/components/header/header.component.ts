@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   permissions = [];
-  constructor() { }
+  currentPermission: any = {}
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
     let data = localStorage.getItem("data");
     if (data) {
       let dataJs = JSON.parse(data);
       this.permissions = dataJs.permissions;
+      this.currentPermission = dataJs.active;
       console.log(this.permissions);
+      console.log(dataJs);
     }
   }
   setOrganization(organizationId: String) {

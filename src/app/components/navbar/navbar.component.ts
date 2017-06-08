@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  permissions = [];
+  currentPermission: any = {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    let data = localStorage.getItem("data");
+    let permission = localStorage.getItem("active");
+    if (data) {
+      let dataJs = JSON.parse(data);
+      let permissionJs = JSON.parse(permission);
+      this.permissions = dataJs.permissions;
+      this.currentPermission = permissionJs;
+      console.log(this.currentPermission);
+    }
+  }
 
   ngOnInit() {
   }
