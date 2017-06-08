@@ -44,6 +44,9 @@ import { PointComponent } from './activity/components/point/point.component';
 import { MarkComponent } from './activity/components/mark/mark.component';
 import { PointManagementComponent } from './member/point-management/point-management.component';
 import { ActivityManagementComponent } from './member/activity-management/activity-management.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { PageForbiddenComponent } from './pages/page-forbidden/page-forbidden.component';
+import { PageInternalErrorComponent } from './pages/page-internal-error/page-internal-error.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { ActivityManagementComponent } from './member/activity-management/activi
     PointComponent,
     MarkComponent,
     PointManagementComponent,
-    ActivityManagementComponent
+    ActivityManagementComponent,
+    PageNotFoundComponent,
+    PageForbiddenComponent,
+    PageInternalErrorComponent
 
   ],
   imports: [

@@ -46,8 +46,20 @@ export class MarkComponent implements OnInit {
         this.registers = data.json();
       },
       error => {
-        console.log(error);
-        if (error.status == 401) {
+        switch (error.status) {
+          case 401: this.router.navigateByUrl("/login");
+          case 403: this.router.navigateByUrl("/error/403");
+          case 404: this.router.navigateByUrl("/error/404");
+          default: {
+            try {
+              let js = error.json();
+              if (js.code) {
+                this.addToast(js.message, 3000, "error");
+              }
+            } catch (e) {
+              this.addToast(e, 3000, "error");
+            }
+          }
         }
       });
   }
@@ -103,15 +115,20 @@ export class MarkComponent implements OnInit {
         this.addToast("Cập nhập thành công", 2000, "success");
       },
       error => {
-        try {
-          let errorJs = error.json();
-          if (errorJs.code) {
-            this.addToast(errorJs.message, 3000, "error");
-          } else {
-            this.addToast(error, 3000, "error");
+        switch (error.status) {
+          case 401: this.router.navigateByUrl("/login");
+          case 403: this.router.navigateByUrl("/error/403");
+          case 404: this.router.navigateByUrl("/error/404");
+          default: {
+            try {
+              let js = error.json();
+              if (js.code) {
+                this.addToast(js.message, 3000, "error");
+              }
+            } catch (e) {
+              this.addToast(e, 3000, "error");
+            }
           }
-        } catch (e) {
-          this.addToast(e, 3000, "error");
         }
       });
   }

@@ -188,12 +188,11 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
           case 404: {
             this.addToast("Không tìm thấy hoạt động", 200, "error");
             setTimeout(() => {
-              this.router.navigateByUrl("/activities");
+              this.router.navigateByUrl("/error/404");
             }, 2000);
           }
         }
       });
-
   }
   createActivity(activity: Activity) {
     this.activityService.create(activity).subscribe(
@@ -208,17 +207,24 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.isSubmited = false;
       },
       error => {
-        if (error.status == 400) {
-          let errorSV = error.json();
-          errorSV.detail.forEach(element => {
-            this.addToast(element.message, 5000, "error");
-          });
-        } else {
-          let errorSV = error.json();
-          if (errorSV) {
-            if (errorSV.code) {
-              let message = errorSV.message;
-              this.addToast(message, 4000, "error");
+        switch (error.status) {
+          case 401: this.router.navigateByUrl("/login");
+          case 403: this.router.navigateByUrl("/error/403");
+          case 404: this.router.navigateByUrl("/error/404");
+          case 400: {
+            let errorSV = error.json();
+            errorSV.detail.forEach(element => {
+              this.addToast(element.message, 5000, "error");
+            });
+          };
+          default: {
+            try {
+              let js = error.json();
+              if (js.code) {
+                this.addToast(js.message, 3000, "error");
+              }
+            } catch (e) {
+              this.addToast(e, 3000, "error");
             }
           }
         }
@@ -240,21 +246,27 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.isSubmited = false;
       },
       error => {
-        if (error.status == 400) {
-          let errorSV = error.json();
-          errorSV.detail.forEach(element => {
-            this.addToast(element.message, 5000, "error");
-          });
-        } else {
-          let errorSV = error.json();
-          if (errorSV) {
-            if (errorSV.code) {
-              let message = "Mã lỗi: " + errorSV.code + " Chi tiết: " + errorSV.message;
-              this.addToast(message, 4000, "error");
+        switch (error.status) {
+          case 401: this.router.navigateByUrl("/login");
+          case 403: this.router.navigateByUrl("/error/403");
+          case 404: this.router.navigateByUrl("/error/404");
+          case 400: {
+            let errorSV = error.json();
+            errorSV.detail.forEach(element => {
+              this.addToast(element.message, 5000, "error");
+            });
+          };
+          default: {
+            try {
+              let js = error.json();
+              if (js.code) {
+                this.addToast(js.message, 3000, "error");
+              }
+            } catch (e) {
+              this.addToast(e, 3000, "error");
             }
           }
         }
-
         this.isSubmited = false;
       });
   }
