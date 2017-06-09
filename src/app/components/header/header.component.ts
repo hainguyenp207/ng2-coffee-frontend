@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { AuthenticationService } from '../../_services/sercurity/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
   permissions = [];
   currentPermission: any = {}
   constructor(
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -20,8 +22,6 @@ export class HeaderComponent implements OnInit {
       let dataJs = JSON.parse(data);
       this.permissions = dataJs.permissions;
       this.currentPermission = dataJs.active;
-      console.log(this.permissions);
-      console.log(dataJs);
     }
   }
   setOrganization(organizationId: String) {
@@ -35,7 +35,10 @@ export class HeaderComponent implements OnInit {
       organizationId: organizationId
     }
     localStorage.setItem("active", JSON.stringify(data));
-    console.log(data);
+  }
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigateByUrl("/");
   }
 
 }

@@ -1,4 +1,5 @@
 <div class="row">
+  <ng2-toasty [position]="'top-right'"></ng2-toasty>
   <div class="col-sm-6">
     <form role="form">
       <div class="form-group contact-search m-b-30">
@@ -9,8 +10,8 @@
     </form>
   </div>
   <div class="col-md-6">
-    <a class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" data-animation="fadein" data-plugin="custommodal"
-      data-overlayspeed="200" data-overlaycolor="#36404a">
+    <a [routerLink]="['new']" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" data-animation="fadein"
+      data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a">
                                 <i class="md md-add"></i> Thêm mới</a>
     <div class="h5 m-0">
       <div class="btn-group vertical-middle" data-toggle="buttons">
@@ -18,7 +19,11 @@
 										    <input type="checkbox" autocomplete="off"> Tên
 										 </label>
         <label class="btn btn-white btn-md waves-effect active">
-										    <input type="checkbox" autocomplete="off" checked=""> Trạng thái
+										    <input type="checkbox" autocomplete="off"> Trạng thái
+										 </label>
+        <label class="btn btn-white btn-md waves-effect active">
+										    <input type="checkbox" autocomplete="off" checked="true"> Chờ duyệt
+                        <span class="label label-pink">{{countActivities}}</span>
 										 </label>
         <label class="btn btn-white btn-md waves-effect">
 										    <input type="checkbox" autocomplete="off"> Thời gian
@@ -38,8 +43,15 @@
         </div>
         <div class="table-detail">
           <div class="member-info">
-            <h4 class="m-t-0"><b>{{activity.name}}</b></h4>
-            <p class="text-dark m-b-5"><b>Ngày tạo: </b> <span class="text-muted">{{activity.createdDate}}</span></p>
+            <h4 class="m-t-0"><b>
+                      <a href="/activities/{{activity.id}}">{{activity.name}}</a>
+              </b></h4>
+            <ng-template [ngIf]="isFullPermission()">
+              <p class="text-dark m-b-5"><b>Chi doan: </b> <span class="text-muted">{{activity.organization.name}}</span></p>
+            </ng-template>
+            <ng-template [ngIf]="!isFullPermission()">
+              <p class="text-dark m-b-5"><b>Ngày tạo: </b> <span class="text-muted">{{activity.createdDate}}</span></p>
+            </ng-template>
           </div>
         </div>
 
@@ -48,11 +60,15 @@
           <p class="text-dark m-b-5"><b>Ngày kết thúc: </b> <span class="text-muted">{{activity.endDate}}</span></p>
         </div>
         <div class="table-detail lable-detail">
+          <span class="label label-danger">{{activity.confirmed?"Đã duyệt":"Chờ duyệt"}}</span>
           <span class="label label-info">{{activity.status}}</span>
         </div>
         <div class="table-detail">
-          <a href="/activities/{{activity.id}}" class="btn btn-sm btn-default">Chi tiết</a>
-          <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+
+          <ng-template [ngIf]="isFullPermission()">
+            <a (click)="confirm(activity,activity.confirmed?false:true)" class="btn btn-sm waves-effect waves-light" [ngClass]="activity.confirmed?'btn-info':'btn-danger'">{{activity.confirmed?"Hủy duyệt":"Duyệt"}} </a>
+          </ng-template>
+          <a (click)="delete(activity.id)" class="btn btn-sm btn-danger">Xóa</a>
         </div>
       </div>
     </div>

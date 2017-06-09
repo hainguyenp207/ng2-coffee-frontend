@@ -9,10 +9,11 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 export class AppComponent {
   title = 'app works!';
   authentication = {};
+  data: any;
   ngOnInit() {
-    let data = localStorage.getItem("data");
-    if (data) {
-      this.authentication = JSON.parse(data);
+    this.data = localStorage.getItem("data");
+    if (this.data) {
+      this.authentication = JSON.parse(this.data);
     }
   }
 
