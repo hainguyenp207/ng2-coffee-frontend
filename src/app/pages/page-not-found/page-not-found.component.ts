@@ -13,7 +13,6 @@ export class PageNotFoundComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.activatedRoute.snapshot.queryParams["return_url"];
-    console.log(this.returnUrl);
     if (!this.returnUrl) {
       this.returnUrl = "/";
     }

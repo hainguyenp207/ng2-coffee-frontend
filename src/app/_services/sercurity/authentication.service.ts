@@ -25,7 +25,7 @@ export class AuthenticationService {
     var token = localStorage.getItem("token");
     localStorage.removeItem('token');
     localStorage.removeItem('data');
-    return this.http.post('/api/v1/logout', JSON.stringify({ token: token }))
+    this.http.post('/api/v1/logout', JSON.stringify({ token: token }))
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         localStorage.removeItem('token');

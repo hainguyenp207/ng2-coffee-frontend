@@ -1,0 +1,4 @@
+.pagination .ngx-pagination .current{
+    padding: 10px;
+    background-color: red
+}

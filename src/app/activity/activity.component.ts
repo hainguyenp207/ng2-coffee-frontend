@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivityService } from '../_services/index';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Activity } from "../_models/index";
 
 @Component({
   selector: 'app-activity',
@@ -12,8 +14,17 @@ export class ActivityComponent implements OnInit {
   activities: any = [];
   permissions = [];
   currentPermission: any = {};
+  currentActivity: any = {};
   countActivities: number = 0;
   count: number = 0;
+  loading: false;
+  paging: any = {
+    currentPage: 0,
+    total: 0,
+    perPage: 10
+  }
+  @ViewChild('orgModal') public orgModal: ModalDirective;
+
   constructor(private activityService: ActivityService,
     private route: ActivatedRoute,
     private router: Router,
@@ -27,18 +38,18 @@ export class ActivityComponent implements OnInit {
       this.permissions = dataJs.permissions;
       this.currentPermission = permissionJs;
     }
-    this.fetchActivities();
+    this.fetchActivities(0, 10);
     this.countActivity();
   }
 
   ngOnInit() {
 
   }
-  fetchActivities() {
+  fetchActivities(page: number, size: number) {
     if (this.isFullPermission()) {
-      this.activityService.getAll().subscribe(
+      this.activityService.getActivitiesPaging(page, size).subscribe(
         data => {
-          this.activities = data;
+          this.activities = data.json();
         },
         error => {
           if (error.status == 401) {
@@ -69,7 +80,8 @@ export class ActivityComponent implements OnInit {
   countActivity() {
     this.activityService.countActivity().subscribe(
       data => {
-        this.count = data.json();
+        this.paging.total = data.json();
+        console.log(this.paging.total);
       },
       error => {
         this.handleError(error);
@@ -92,7 +104,13 @@ export class ActivityComponent implements OnInit {
         this.handleError(error);
       });
   }
-
+  public showModal(activity: Activity): void {
+    this.currentActivity = activity;
+    this.orgModal.show();
+  }
+  public hideModal(): void {
+    this.orgModal.hide();
+  }
   addToast(message, timeOut, type) {
     // Or create the instance of ToastOptions
     var toastOptions: ToastOptions = {
@@ -120,14 +138,19 @@ export class ActivityComponent implements OnInit {
       error => {
         this.handleError(error);
       });
+    this.hideModal();
+
   }
   handleSuccess(data: any) {
-    var json = data.json();
-    if (json.code) {
-      this.addToast(json.message, 2000, "success");
+    if (data.status === 204) {
+      this.addToast("Hoat dong da duoc xoa thanh cong", 2000, "success");
+    } else {
+      var json = data.json();
+      if (json.code == 0) {
+        this.addToast(json.message, 2000, "success");
+      }
     }
-
-    this.fetchActivities();
+    this.fetchActivities(this.paging.currentPage, this.paging.perPage);
   }
   handleError(error: any) {
     switch (error.status) {
@@ -151,6 +174,10 @@ export class ActivityComponent implements OnInit {
         }
       }
     }
+  }
+  getPage(page: number) {
+    this.paging.currentPage = page - 1;
+    this.fetchActivities(page - 1, this.paging.perPage)
   }
 
 }

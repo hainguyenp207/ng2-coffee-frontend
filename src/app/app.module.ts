@@ -31,6 +31,7 @@ import { ActivityDetailComponent } from './activity/components/activity-detail/a
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { MomentModule } from 'angular2-moment';
 import { NgSpinKitModule } from 'ng-spin-kit';
+import { NgxPaginationModule } from 'ngx-pagination'; //
 import {
   LoadingAnimateModule, LoadingAnimateService,
 
@@ -47,6 +48,7 @@ import { ActivityManagementComponent } from './member/activity-management/activi
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PageForbiddenComponent } from './pages/page-forbidden/page-forbidden.component';
 import { PageInternalErrorComponent } from './pages/page-internal-error/page-internal-error.component';
+
 
 @NgModule({
   declarations: [
@@ -89,7 +91,8 @@ import { PageInternalErrorComponent } from './pages/page-internal-error/page-int
     Daterangepicker,
     MomentModule,
     NgSpinKitModule,
-    LoadingAnimateModule.forRoot()
+    LoadingAnimateModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     AuthenticationService,

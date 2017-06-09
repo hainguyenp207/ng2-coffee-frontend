@@ -20,7 +20,11 @@ export class ActivityService {
     }
 
     getAll() {
-        return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response);
+    }
+
+    getActivitiesPaging(page: number, size: number) {
+        return this.http.get(this.backendAPI + `?page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
     }
 
     getById(id: string) {
@@ -38,8 +42,11 @@ export class ActivityService {
 
     getActivityByOrg(orgId: string) {
         return this.http.get(this.backendAPI + "org/" + orgId, this.jwt()).map((response: Response) => response);
-
     }
+    getActivityByOrgPaging(orgId: string, page: number, size: number) {
+        return this.http.get(this.backendAPI + `org/${orgId}?page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
+
     countActivity() {
         return this.http.get(this.backendAPI + "count", this.jwt()).map((response: Response) => response);
 
@@ -59,6 +66,7 @@ export class ActivityService {
     delete(id: string) {
         return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
+
 
     // private helper methods
 
