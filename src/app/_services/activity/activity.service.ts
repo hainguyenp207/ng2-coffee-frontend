@@ -46,14 +46,21 @@ export class ActivityService {
     getActivityByOrgPaging(orgId: string, page: number, size: number) {
         return this.http.get(this.backendAPI + `org/${orgId}?page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
     }
-
+    // Lấy danh sách các hoạt động để đăng ký
+    getActivityPoint(orgId: string, page: number, size: number) {
+        return this.http.get(this.backendAPI + `org/${orgId}/points?page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
     countActivity() {
         return this.http.get(this.backendAPI + "count", this.jwt()).map((response: Response) => response);
-
+    }
+    countActivityOrg(orgId: string) {
+        return this.http.get(`${this.backendAPI}count?org=${orgId}`, this.jwt()).map((response: Response) => response);
+    }
+    countActivityOrgConfirm(orgId: string) {
+        return this.http.get(`${this.backendAPI}count/confirm?org=${orgId}`, this.jwt()).map((response: Response) => response);
     }
     countActivityConfirm() {
         return this.http.get(this.backendAPI + "count/confirm", this.jwt()).map((response: Response) => response);
-
     }
     create(activity: Activity) {
         return this.http.post(this.backendAPI, activity, this.jwt()).map((response: Response) => response);

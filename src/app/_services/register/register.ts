@@ -32,9 +32,15 @@ export class RegisterService {
     // Lấy danh sách tất cả hoạt động của 1 user
     getRegisterByUser(userId: string) {
         return this.http.get(this.backendRegister + "user/" + userId, this.jwt()).map((response: Response) => response);
-
     }
-
+    // Đếm tổng số hoạt động đăng ký của 1 user...
+    countRegisterOfUser(userId: string) {
+        return this.http.get(`${this.backendRegister}count/user_id=${userId}`, this.jwt()).map((response: Response) => response);
+    }
+    // Đếm tổng số người đăng ký ...
+    countRegisterOfActivity(activityId: string) {
+        return this.http.get(`${this.backendRegister}count/activity_id=${activityId}`, this.jwt()).map((response: Response) => response);
+    }
     create(register: Register) {
         return this.http.post(this.backendActivity, register, this.jwt()).map((response: Response) => response);
     }

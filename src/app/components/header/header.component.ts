@@ -30,15 +30,14 @@ export class HeaderComponent implements OnInit {
       if (permission.organization.id == organizationId)
         roleId = permission.role.id;
     });
-    let data = {
-      roleId: roleId,
-      organizationId: organizationId
-    }
+    let data = JSON.parse(this.currentPermission);
+    data.organization.id = organizationId;
+    data.role.id = roleId;
     localStorage.setItem("active", JSON.stringify(data));
   }
   logout() {
     this.authenticationService.logout();
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/login");
   }
 
 }

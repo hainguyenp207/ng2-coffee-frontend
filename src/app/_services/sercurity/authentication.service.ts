@@ -15,7 +15,10 @@ export class AuthenticationService {
         let token = response.headers.get("x-authorization");
         if (token) {
           localStorage.setItem("token", token);
-          localStorage.setItem("data", JSON.stringify(response.json()));
+          let data = response.json();
+          let permissions = data.permissions;
+          localStorage.setItem('active', JSON.stringify(permissions[0]));
+          localStorage.setItem("data", JSON.stringify(data));
         }
       });
   }
@@ -24,6 +27,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     var token = localStorage.getItem("token");
     localStorage.removeItem('token');
+    localStorage.removeItem('active');
     localStorage.removeItem('data');
     this.http.post('/api/v1/logout', JSON.stringify({ token: token }))
       .map((response: Response) => {

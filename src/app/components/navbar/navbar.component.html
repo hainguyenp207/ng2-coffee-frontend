@@ -7,7 +7,7 @@
           <li class="text-muted menu-title">Điều hướng</li>
 
           <!--=== CAN BO TRUONG === -->
-          <ng-template [ngIf]="currentPermission.roleId=='ADMIN'">
+          <ng-template [ngIf]="currentPermission.role.id=='ADMIN'">
             <li class="has_sub">
               <a href="javascript:void(0);" class="waves-effect">
               <i class="ti-paint-bucket"></i>
@@ -15,17 +15,17 @@
                <span class="menu-arrow"></span> 
                </a>
               <ul class="list-unstyled">
-                <li><a [routerLink]="['/admin/activities']">Danh sách hoạt động</a></li>
-                <li><a [routerLink]="['/admin/activities/new']">Tạo hoạt động</a></li>
+                <li><a [routerLink]="['/pages/admin/activities']">Danh sách hoạt động</a></li>
+                <li><a [routerLink]="['/pages/admin/activities/new']">Tạo hoạt động</a></li>
               </ul>
             </li>
             <li class="has_sub">
-              <a [routerLink]="['/admin/organization']" class="waves-effect">
+              <a [routerLink]="['/pages/admin/organizations']" class="waves-effect">
             <i class="ti-bar-chart"></i>
             <span> Quản lý chi đoàn </span></a>
             </li>
             <li class="has_sub">
-              <a [routerLink]="['/admin/users']" class="waves-effect">
+              <a [routerLink]="['/pages/admin/users']" class="waves-effect">
             <i class="ti-user"></i> 
               <span> Quản lý đoàn viên </span>
              <span class="menu-arrow"></span> 
@@ -34,7 +34,7 @@
           </ng-template>
 
           <!-- === CAN BO DOAN === -->
-          <ng-template [ngIf]="currentPermission.roleId=='CBD'">
+          <ng-template [ngIf]="currentPermission.role.id=='CBD'">
             <li class="has_sub">
               <a href="javascript:void(0);" class="waves-effect">
               <i class="ti-paint-bucket"></i>
@@ -42,17 +42,17 @@
                <span class="menu-arrow"></span> 
                </a>
               <ul class="list-unstyled">
-                <li><a [routerLink]="['/cbd/activities']">Danh sách hoạt động</a></li>
-                <li><a [routerLink]="['/cbd/activities/new']">Tạo hoạt động</a></li>
+                <li><a [routerLink]="['/pages/cbd/activities']">Danh sách hoạt động</a></li>
+                <li><a [routerLink]="['/pages/cbd/activities/new']">Tạo hoạt động</a></li>
               </ul>
             </li>
             <li class="has_sub">
-              <a [routerLink]="['/cbd/points']" class="waves-effect">
+              <a [routerLink]="['/pages/cbd/activities/points']" class="waves-effect">
             <i class="ti-bar-chart"></i>
             <span> Điểm danh </span></a>
             </li>
             <li class="has_sub">
-              <a [routerLink]="['/cbd/users']" class="waves-effect">
+              <a [routerLink]="['/pages/cbd/users']" class="waves-effect">
             <i class="ti-user"></i> 
               <span> Quản lý tài khoản </span>
              <span class="menu-arrow"></span> 
@@ -61,16 +61,16 @@
           </ng-template>
 
           <!-- === SINH VIÊN ==== -->
-          <ng-template [ngIf]="currentPermission.roleId=='STUDENT'">
+          <ng-template [ngIf]="currentPermission.role.id=='STUDENT'">
             <li class="has_sub">
-              <a [routerLink]="['/user/activities']" class="waves-effect">
+              <a [routerLink]="['/pages/user/activities']" class="waves-effect">
             <i class="ti-user"></i> 
               <span>Danh sách hoạt động </span>
              <span class="menu-arrow"></span> 
              </a>
             </li>
             <li class="has_sub">
-              <a [routerLink]="['/user/point']" class="waves-effect">
+              <a [routerLink]="['/pages/user/point']" class="waves-effect">
             <i class="ti-user"></i> 
               <span>Điểm CTXH/Rèn luyện </span>
              <span class="menu-arrow"></span> 
