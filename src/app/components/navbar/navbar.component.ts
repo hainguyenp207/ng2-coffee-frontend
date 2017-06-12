@@ -20,7 +20,8 @@ export class NavbarComponent implements OnInit {
       let permissionJs = JSON.parse(permission);
       this.permissions = dataJs.permissions;
       this.currentPermission = permissionJs;
-      console.log(this.currentPermission);
+    } else {
+      this.router.navigateByUrl('/login');
     }
   }
 

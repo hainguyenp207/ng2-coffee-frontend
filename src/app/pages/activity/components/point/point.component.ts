@@ -120,4 +120,9 @@ export class PointComponent implements OnInit {
     this.paging.currentPage = page - 1;
     this.fetchActivities(page - 1, this.paging.perPage)
   }
+  isEmpty() {
+    if (this.activities.length == 0)
+      return true;
+    return false;
+  }
 }

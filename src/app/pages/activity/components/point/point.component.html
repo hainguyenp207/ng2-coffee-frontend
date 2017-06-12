@@ -28,12 +28,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr role="row" *ngFor="let activity of activities| paginate: { id: 'server', itemsPerPage: paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total} ;  let i = index ">
+                <tr role="row" *ngFor="let activity of activities | paginate: { id: 'server', itemsPerPage: paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total} ;  let i = index ">
                   <td class="sorting_1">{{i+1}}</td>
                   <td>{{activity.name}}</td>
                   <td>{{activity.startDate}}</td>
                   <td>{{activity.countRegistered}}</td>
                   <td><a [routerLink]="['mark',(activity.id)]" class="btn btn-default user">Chi tiết</a> </td>
+                </tr>
+                <tr *ngIf="isEmpty()">
+                  <td colspan="5" style="text-align: center">
+                    <b style="font-size: 16pt">Chưa có hoạt động nào được đăng</b>
+                  </td>
                 </tr>
               </tbody>
             </table>

@@ -41,7 +41,6 @@ export class ActivityComponent implements OnInit {
     } else {
       this.router.navigateByUrl("/login");
     }
-
   }
 
   ngOnInit() {
@@ -69,28 +68,9 @@ export class ActivityComponent implements OnInit {
           }
         });
     } else if (this.isStudent()) {
-      this.countActivityOrg(this.currentPermission.organization.id);
-      this.activityService.getActivityByOrg(this.currentPermission.organization.id).subscribe(
-        data => {
-          this.activities = data.json();
-        },
-        error => {
-          if (error.status == 401) {
-            this.router.navigateByUrl("/login");
-          }
-        });
-      this.activityService.countActivityOrgConfirm(this.currentPermission.organization.id).subscribe(
-        data => {
-          this.countActivities = data.json();
-        },
-        error => {
-          if (error.status == 401) {
-            this.router.navigateByUrl("/login");
-          }
-        });
+      this.router.navigateByUrl("pages/user/activities");
     }
     else {
-
       this.countActivityOrg(this.currentPermission.organization.id);
       this.activityService.getActivityByOrg(this.currentPermission.organization.id).subscribe(
         data => {

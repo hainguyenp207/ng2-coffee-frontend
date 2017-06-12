@@ -13,7 +13,9 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
 })
 export class PointManagementComponent implements OnInit {
 
-  registers: Array<Register>;
+  registers: Array<Register> = [];
+  data: any = {};
+  point: any = {};
   constructor(
     private orgService: OrganizationService,
     private registerService: RegisterService,
@@ -22,10 +24,15 @@ export class PointManagementComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.fetchRegisterByUser("admin");
+    this.data = JSON.parse(localStorage.getItem("data"));
+    this.fetchRegisterByUser(this.data.username);
   }
 
   ngOnInit() {
+  }
+
+  isEmpty() {
+    return (this.registers.length === 0) ? true : false;
   }
   fetchRegisterByUser(userId: string) {
     this.registerService.getRegisterByUser(userId).subscribe(data => {

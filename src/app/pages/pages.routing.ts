@@ -5,6 +5,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
+
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { NewUserComponent } from './users/components/new-user/new-user.component';
@@ -20,6 +22,10 @@ import { PageInternalErrorComponent } from './page-internal-error/page-internal-
 import { PageForbiddenComponent } from './page-forbidden/page-forbidden.component'
 
 export const routes: Routes = [
+    {
+        path: '',
+        component: MainComponent
+    },
     {
         path: 'login',
         loadChildren: 'app/pages/login/login.module#LoginModule'

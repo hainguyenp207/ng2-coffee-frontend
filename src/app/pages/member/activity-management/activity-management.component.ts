@@ -16,27 +16,29 @@ export class ActivityManagementComponent implements OnInit {
 
   activities: any = [];
   registers: any = [];
+  data: any = {};
   constructor(private orgService: OrganizationService,
     private registerService: RegisterService,
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig,
     private route: ActivatedRoute,
     private router: Router) {
-    this.fetchRegisterByUser("admin");
+    this.data = JSON.parse(localStorage.getItem("data"));
+    this.fetchRegisterByUser(this.data.username);
   }
 
   ngOnInit() {
-    this.registerService.getRegisterByUser("admin").subscribe(
-      data => {
-        this.activities = data;
-        console.log("Activities", data);
-      },
-      error => {
-        console.log(error);
-        if (error.status == 401) {
-          console.log("Chua dang nhap");
-        }
-      });
+    // this.registerService.getRegisterByUser("admin").subscribe(
+    //   data => {
+    //     this.activities = data;
+    //     console.log("Activities", data);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //     if (error.status == 401) {
+    //       console.log("Chua dang nhap");
+    //     }
+    //   });
   }
   fetchRegisterByUser(userId: string) {
     this.registerService.getRegisterByUser(userId).subscribe(data => {
@@ -77,5 +79,8 @@ export class ActivityManagementComponent implements OnInit {
       case 'error': this.toastyService.error(toastOptions); break;
       case 'warning': this.toastyService.warning(toastOptions); break;
     }
+  }
+  isEmpty() {
+    return (this.registers.length === 0) ? true : false;
   }
 }
