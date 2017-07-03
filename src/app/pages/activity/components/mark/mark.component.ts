@@ -85,7 +85,7 @@ export class MarkComponent implements OnInit {
           case 404: {
             this.addToast("Không tìm thấy hoạt động", 200, "error");
             setTimeout(() => {
-              this.router.navigateByUrl("/activities");
+              this.router.navigateByUrl("/pages/activities");
             }, 2000);
           }
         }

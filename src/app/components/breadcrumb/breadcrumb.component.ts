@@ -9,7 +9,34 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 export class BreadcrumbComponent implements OnInit {
 
   breadcrumbs: Array<Object>;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  title: string = "";
+  sub: any = "";
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd) {
+        if (val.url.includes("/activities/new")) {
+          this.title = "Quản lý hoạt động";
+          this.sub = "Tạo mới"
+        } else if (val.url.includes("/activities/points")) {
+          this.title = "Điểm danh";
+          this.sub = "Điểm danh"
+        }
+        else if (val.url.includes("/activities")) {
+          this.title = "Quản lý hoạt động";
+          this.sub = "Danh sách"
+        }
+        else if (val.url.includes("/users/new")) {
+          this.title = "Tạo tài khoản";
+          this.sub = "Tài khoản"
+        }
+        else if (val.url.includes("/users")) {
+          this.title = "Quản lý tài khoản";
+          this.sub = "Tài khoản"
+        }
+      }
+    });
+  }
 
   ngOnInit() {
   }

@@ -24,6 +24,9 @@ export class RegisterService {
     getAll(idActivity: string) {
         return this.http.get(this.backendActivity + idActivity + "/registers", this.jwt()).map((response: Response) => response);
     }
+    checkRegisteredActivity(idActivity: string, idUser: string) {
+        return this.http.get(this.backendRegister + "/user/" + idUser + "/activities/" + idActivity, this.jwt()).map((response: Response) => response);
+    }
 
     // Danh sachs người đăng ký theo hoạt động
     getById(idActivity: string, idRegister: string) {

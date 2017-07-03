@@ -26,7 +26,7 @@
             </li>
             <li class="has_sub">
               <a [routerLink]="['/pages/admin/users']" class="waves-effect">
-            <i class="ti-user"></i> 
+            <i class="fa fa-users"></i> 
               <span> Quản lý đoàn viên </span>
              <span class="menu-arrow"></span> 
              </a>
@@ -36,8 +36,8 @@
           <!-- === CAN BO DOAN === -->
           <ng-template [ngIf]="currentPermission.role.id=='CBD'">
             <li class="has_sub">
-              <a href="javascript:void(0);" class="waves-effect">
-              <i class="ti-paint-bucket"></i>
+              <a class="waves-effect">
+              <i class="fa fa-tasks"></i>
                <span> Quản lý hoạt động </span> 
                <span class="menu-arrow"></span> 
                </a>
@@ -48,14 +48,13 @@
             </li>
             <li class="has_sub">
               <a [routerLink]="['/pages/cbd/activities/points']" class="waves-effect">
-            <i class="ti-bar-chart"></i>
+            <i class="fa fa-pencil"></i>
             <span> Điểm danh </span></a>
             </li>
             <li class="has_sub">
               <a [routerLink]="['/pages/cbd/users']" class="waves-effect">
-            <i class="ti-user"></i> 
+            <i class="fa fa-users"></i> 
               <span> Quản lý tài khoản </span>
-             <span class="menu-arrow"></span> 
              </a>
             </li>
           </ng-template>
@@ -64,7 +63,7 @@
           <ng-template [ngIf]="currentPermission.role.id=='STUDENT'">
             <li class="has_sub">
               <a [routerLink]="['/pages/user/activities']" class="waves-effect">
-            <i class="ti-user"></i> 
+            <i class="fa fa-tasks"></i> 
               <span>Danh sách hoạt động </span>
              <span class="menu-arrow"></span> 
              </a>

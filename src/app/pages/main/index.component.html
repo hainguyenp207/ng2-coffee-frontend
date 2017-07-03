@@ -1,0 +1,20 @@
+<div class="clear"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div *ngFor="let activity of activities | paginate: { id: 'server', itemsPerPage:
+                paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total }">
+                <main-activity [data]="activity"></main-activity>
+            </div>
+
+        </div>
+    </div>
+    <div class="row " style="padding-top: 20px ">
+        <div class="col-lg-12 col-md-12 ">
+            <div style="text-align: center ">
+                <div class="spinner" [ngClass]="{ 'hidden': !loading } "></div>
+                <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

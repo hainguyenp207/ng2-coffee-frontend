@@ -5,7 +5,6 @@ import { ModuleWithProviders } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
 
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
@@ -22,10 +21,6 @@ import { PageInternalErrorComponent } from './page-internal-error/page-internal-
 import { PageForbiddenComponent } from './page-forbidden/page-forbidden.component'
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: MainComponent
-    },
     {
         path: 'login',
         loadChildren: 'app/pages/login/login.module#LoginModule'
@@ -65,8 +60,8 @@ export const routes: Routes = [
             { path: 'admin/activities/new', component: ActivityDetailComponent },
             { path: 'admin/activities/edit/:id', component: ActivityDetailComponent },
 
-            { path: 'cdb/users', component: UsersComponent },
-            { path: 'cdb/users/new', component: NewUserComponent },
+            { path: 'cbd/users', component: UsersComponent },
+            { path: 'cbd/users/new', component: NewUserComponent },
             { path: 'cbd/users/edit/:id', component: EditUserComponent },
 
             { path: 'cbd/activities', component: ActivityComponent },

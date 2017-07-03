@@ -66,8 +66,6 @@ import { PagesModule } from './pages/pages.module';
     routing,
     Angular2FontawesomeModule,
     InlineEditorModule,
-    ToastyModule.forRoot(),
-    ModalModule.forRoot(),
     Daterangepicker,
     MomentModule,
     NgSpinKitModule,

@@ -47,7 +47,8 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
   id: string;
   private sub: any;
   loadingSubmit: boolean = false;
-
+  imgSrc: string = "";
+  img: any;
   @ViewChild(DaterangePickerComponent)
   private picker: DaterangePickerComponent;
 
@@ -62,7 +63,8 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     private toastyConfig: ToastyConfig,
     private route: ActivatedRoute,
     private router: Router,
-    private _loadingSvc: LoadingAnimateService
+    private _loadingSvc: LoadingAnimateService,
+
   ) {
     this.toastyConfig.theme = 'material';
     this.router.events.subscribe((val) => {
@@ -172,10 +174,12 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
           this.data.id = dataJs.id;
           this.data.name = dataJs.name;
           this.data.description = dataJs.description;
-          this.daterange.pointSocial = dataJs.pointSocial;
-          this.daterange.pointTranning = dataJs.pointTranning;
+          this.data.pointSocial = dataJs.pointSocial;
+          this.data.pointTranning = dataJs.pointTranning;
           this.picker.datePicker.setStartDate(dataJs.startDate);
           this.picker.datePicker.setEndDate(dataJs.endDate);
+          this.editor.setContent(dataJs.description);
+          console.log(this.editor.getContent())
         }
       },
       error => {
@@ -195,7 +199,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         }
       });
   }
-  createActivity(activity: Activity) {
+  createActivity(activity: any) {
     this.activityService.create(activity).subscribe(
       data => {
         let dataJS = data.json();
@@ -232,7 +236,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.isSubmited = false;
       })
   }
-  updateActivity(activity: Activity, id: string) {
+  updateActivity(activity: any, id: string) {
     activity.id = id;
     this.activityService.update(activity).subscribe(
       data => {
@@ -271,6 +275,23 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.isSubmited = false;
       });
   }
+  readURL(input: any) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (e: any) => {
+        // $('#blah').attr('src', e);
+        this.imgSrc = e.target.result;
+
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  onImgChange(src: any) {
+    this.img = src;
+    this.readURL(src);
+  }
+
   submitActivity() {
     let organizationId = localStorage.getItem("active");
 
@@ -292,6 +313,23 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
       pointTranning: this.data.pointTranning,
       pointSocial: this.data.pointSocial
     };
+    let formData: FormData = new FormData();
+    let file: File = this.img.files[0];
+    console.log(file);
+    formData.append('file', file);
+    formData.append('properties', JSON.stringify(activity));
+    // formData.append('description', this.editor.getContent());
+    // formData.append('startDate', this.daterange.start.format('DD-MM-YYYY HH:mm'));
+    // formData.append('endDate', this.daterange.end.format('DD-MM-YYYY HH:mm'));
+    // formData.append('organizationId', this.active.organization.id);
+    // formData.append('activityTypeId', '1');
+    // formData.append('pointTranning', this.data.pointTranning);
+    // formData.append('pointSocial', this.data.pointSocial);
+
+
+
+    console.log(this.img.files[0]);
+    console.log(formData);
     let inputs = ["name"];
 
 
@@ -307,9 +345,9 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     if (!this.hasFieldError) {
       this.isSubmited = true;
       if (this.typeComponent == "edit") {
-        this.updateActivity(activity, this.id);
+        this.updateActivity(formData, this.id);
       } else if (this.typeComponent == "new") {
-        this.createActivity(activity);
+        this.createActivity(formData);
       }
     }
   }

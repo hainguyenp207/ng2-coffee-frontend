@@ -47,6 +47,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PageForbiddenComponent } from './page-forbidden/page-forbidden.component';
 import { PageInternalErrorComponent } from './page-internal-error/page-internal-error.component';
 import { PagesComponent } from './pages.component';
+import { IndexComponent } from './main/index/index.component';
+import { PostComponent } from './main/components/post/post.component';
 //import { PagesModule } from './pages.module';
 
 
@@ -84,7 +86,9 @@ import { PagesComponent } from './pages.component';
         PointComponent,
         MarkComponent,
         PointManagementComponent,
-        ActivityManagementComponent
+        ActivityManagementComponent,
+        IndexComponent,
+        PostComponent
     ]
 })
 export class PagesModule {

@@ -1,10 +1,18 @@
 <div class="card-box table-responsive">
   <div class="row">
     <div class="col-lg-12">
-      <div id="usersDataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-        <div class="row">
+      <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row" style="padding-bottom: 12px">
           <div class="col-sm-6">
-            <div class="dataTables_length" id="usersDataTable_length"><label>Xem <select name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> mục</label></div>
+            <div class="dataTables_length" id="usersDataTable_length"><label>Xem 
+              <select [(ngModel)]="paging.perPage" name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select> 
+              mục</label>
+            </div>
           </div>
           <div class="col-sm-6">
             <div id="usersDataTable_filter" class="dataTables_filter"><label>Tìm kiếm:<input type="search" class="form-control input-sm" placeholder="" aria-controls="usersDataTable"></label></div>
@@ -48,7 +56,7 @@
           <div class="col-lg-12 col-md-12">
             <div style="text-align: center">
               <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
-              <pagination-controls class="pagination" (pageChange)="getPage($event)" id="server"></pagination-controls>
+              <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
             </div>
           </div>
         </div>

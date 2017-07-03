@@ -8,4 +8,5 @@ export class Activity {
     activityTypeId: string
     pointTranning: number
     pointSocial: number
+    avatar?: any
 }

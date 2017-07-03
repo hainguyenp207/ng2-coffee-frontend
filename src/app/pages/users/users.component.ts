@@ -20,6 +20,8 @@ export class UsersComponent implements OnInit {
   rolesUser: any = [];
   dataRole: any = {};
   dataRoles: any = [];
+  permissions = [];
+  currentPermission: any = {};
   constructor(
     private userService: UserService,
     private orgService: OrganizationService,
@@ -28,7 +30,18 @@ export class UsersComponent implements OnInit {
     private toastyConfig: ToastyConfig,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+    let data = localStorage.getItem("data");
+    let permission = localStorage.getItem("active");
+    if (data) {
+      let dataJs = JSON.parse(data);
+      let permissionJs = JSON.parse(permission);
+      this.permissions = dataJs.permissions;
+      this.currentPermission = permissionJs;
+    } else {
+      this.router.navigateByUrl("/login");
+    }
+  }
 
   ngOnInit() {
     this.userService.getAll().subscribe(
@@ -107,9 +120,27 @@ export class UsersComponent implements OnInit {
       case 'warning': this.toastyService.warning(toastOptions); break;
     }
   }
-
-  getLinkEdit(id: string) {
-    return '/users/edit/' + id;
+  isFullPermission() {
+    if (this.currentPermission.role.id === 'ADMIN'
+      && this.currentPermission.organization.id === 'HCMUTE') {
+      return true;
+    } else
+      return false;
+  }
+  isRoleOrg() {
+    if (this.currentPermission.role.id === 'CBD') {
+      return true;
+    } else
+      return false;
+  }
+  getLinkEdit(userId: string) {
+    if (this.isFullPermission()) {
+      return ['/pages/admin/activities/edit/' + userId];
+    }
+    if (this.isRoleOrg()) {
+      return ['/pages/cbd/activities/edit/' + userId];
+    }
+    return ''
   }
   createUser() {
     this.userService.create(this.user).subscribe(

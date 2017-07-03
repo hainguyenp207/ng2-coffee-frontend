@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     let data = JSON.parse(this.currentPermission);
     data.organization.id = organizationId;
     data.role.id = roleId;
-    localStorage.setItem("active", JSON.stringify(data));
+    localStorage.setItem("active", data);
   }
   logout() {
     this.authenticationService.logout();

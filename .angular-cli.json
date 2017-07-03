@@ -1,10 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "thecoffeeinfinity"
+    "name": "He thong quan ly"
   },
   "apps": [
     {
+      "name": "dashboard",
       "root": "src",
       "outDir": "dist",
       "assets": [
@@ -41,6 +42,7 @@
       }
     },
     {
+      "name": "outside",
       "root": "src",
       "outDir": "dist",
       "assets": [
@@ -48,6 +50,7 @@
         "favicon.ico"
       ],
       "index": "main.html",
+      "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",

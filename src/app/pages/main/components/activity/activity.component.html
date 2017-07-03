@@ -1,0 +1,35 @@
+<div class="col-md-4 col-sm-6" style="padding: 10px">
+  <div class="post_item">
+    <div class="post-body">
+      <span id="{{data.id}}">
+            <a href="#/activities/post/{{data.id}}">
+               <div class="large_thumb thumb_hover">
+                  <div class="img_wrapper">
+                     <img class="thumb" src="https://4.bp.blogspot.com/-EUyHEO_NPEw/U5oSvanjKuI/AAAAAAAAAbs/Fbpum51zFxA/s1600/1+(1).jpg">
+                  </div>
+               </div>
+            </a>
+            <h3 class="post_item_title">
+               <a rel="bookmark" href="#/activities/post/{{data.id}}">
+               {{data.name}}
+               </a>
+            </h3>
+            <div class="post_meta">
+               <span style="color: #E74C3C;">
+                 {{data.organization.name}}
+               </span>
+      <span class="time">
+                  {{data.createdDate}}
+               </span>
+    </div>
+    <div class="post_item_inner">
+      <p>
+        {{data.desc}}
+      </p>
+      <div class="clear"></div>
+    </div>
+    </span>
+  </div>
+  <div class="clear"></div>
+</div>
+</div>

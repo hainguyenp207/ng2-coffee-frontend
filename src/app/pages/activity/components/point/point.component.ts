@@ -46,7 +46,7 @@ export class PointComponent implements OnInit {
   }
   fetchActivities(page: number, size: number) {
     this.countActivityOrg(this.currentPermission.organization.id);
-    this.activityService.getActivityPoint(this.currentPermission.organization.id, 0, 10).subscribe(
+    this.activityService.getActivityPoint(this.currentPermission.organization.id, page, size).subscribe(
       data => {
         this.activities = data.json();
       },
@@ -117,9 +117,14 @@ export class PointComponent implements OnInit {
     }
   }
   getPage(page: number) {
+    console.log(page);
     this.paging.currentPage = page - 1;
     this.fetchActivities(page - 1, this.paging.perPage)
   }
+  setItemPerPage(e) {
+    console.log(e);
+  }
+
   isEmpty() {
     if (this.activities.length == 0)
       return true;

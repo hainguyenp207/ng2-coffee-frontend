@@ -124,6 +124,27 @@ export class ActivityComponent implements OnInit {
     } else
       return false;
   }
+  canDeleteActivity(isConfirmed) {
+    return !isConfirmed;
+  }
+  canEditActivity(isConfirmed) {
+    return !isConfirmed;
+  }
+  isRoleOrg() {
+    if (this.currentPermission.role.id === 'CBD') {
+      return true;
+    } else
+      return false;
+  }
+  getLinkEdit(activityId: string) {
+    if (this.isFullPermission()) {
+      return ['/pages/admin/activities/edit/' + activityId];
+    }
+    if (this.isRoleOrg()) {
+      return ['/pages/cbd/activities/edit/' + activityId];
+    }
+    return ''
+  }
   confirm(activity: any, confirm: boolean) {
     activity.confirmed = confirm;
     this.activityService.update(activity).subscribe(

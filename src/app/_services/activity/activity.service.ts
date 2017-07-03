@@ -14,8 +14,9 @@ export class ActivityService {
     }
     getHeaders() {
         return new Headers({
-            'Content-Type': 'application/json',
-            "x-authorization": this.getTokenFromLocalStorage()
+            'Content-Type': '   ',
+            "x-authorization": this.getTokenFromLocalStorage(),
+
         }, )
     }
 
@@ -62,8 +63,8 @@ export class ActivityService {
     countActivityConfirm() {
         return this.http.get(this.backendAPI + "count/confirm", this.jwt()).map((response: Response) => response);
     }
-    create(activity: Activity) {
-        return this.http.post(this.backendAPI, activity, this.jwt()).map((response: Response) => response);
+    create(activity: any) {
+        return this.http.post(this.backendAPI, activity, this.jwt2()).map((response: Response) => response);
     }
 
     update(activity: Activity) {
@@ -83,6 +84,19 @@ export class ActivityService {
 
         let headers = new Headers();
         headers.append('content-type', 'application/json', );
+        headers.append('x-authorization', token);
+        return new RequestOptions({ headers: headers });
+
+    }
+    private jwt2() {
+        // create authorization header with jwt token
+        let token = localStorage.getItem('token');
+
+        let headers = new Headers();
+        // headers.append('Content-Type', 'multipart/form-data');
+        //headers.append('Accept', 'application/json');
+        //headers.append('enctype', 'multipart/form-data')
+        //headers.append('Content-Type', undefined);
         headers.append('x-authorization', token);
         return new RequestOptions({ headers: headers });
 
