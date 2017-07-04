@@ -83,8 +83,8 @@ export class ActivityService {
         return this.http.post(this.backendAPI, activity, this.jwt2()).map((response: Response) => response);
     }
 
-    update(activity: Activity) {
-        return this.http.put(this.backendAPI + activity.id, activity, this.jwt()).map((response: Response) => response);
+    update(activity: any) {
+        return this.http.put(this.backendAPI + activity.id, activity, this.jwt2()).map((response: Response) => response);
     }
 
     delete(id: string) {

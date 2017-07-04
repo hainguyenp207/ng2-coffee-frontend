@@ -8,13 +8,13 @@
       </div>
       <div class="row">
         <div class="col-md-4 col-sm-12" style="text-align:center">
-          <img src="/assets/images/brand/envato.jpg" style="min-height: 100%; max-height: 100%">
+          <img src="{{getLinkImg(activity.imgUrl)}}" class="thumb-lg">
         </div>
         <div class="col-md-8 col-sm-12">
-          <h3>Tên: <b>{{activity.name}}</b></h3>
-          <h4> <b>Ngày tổ chức:</b> {{activity.startDate}} <i class="fa fa-calendar" aria-hidden="true"></i> </h4>
-          <h4> <b>Ngày kết thúc:</b> {{activity.endDate}} <i class="fa fa-calendar" aria-hidden="true"></i></h4>
-          <h4><b><i class="fa fa-th-large" aria-hidden="true"></i> Số lượng:</b> {{registers.length}}</h4>
+          <h3>Tên hoạt động: <b>{{activity.name}}</b></h3>
+          <h4><i class="fa fa-calendar" aria-hidden="true"></i> <b>Ngày tổ chức:</b> {{activity.startDate}} </h4>
+          <h4> <i class="fa fa-calendar" aria-hidden="true"></i> <b>Ngày kết thúc:</b> {{activity.endDate}}</h4>
+          <h4><i class="fa fa-users" aria-hidden="true"></i> <b> Số lượng:</b> {{registers.length}}</h4>
         </div>
       </div>
     </div>
@@ -26,9 +26,17 @@
       <ng2-toasty [position]="'top-right'"></ng2-toasty>
       <h2>Danh sách đăng ký</h2>
       <div id="usersDataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-        <div class="row">
+        <div class="row" style="padding: 20px 0">
           <div class="col-sm-6">
-            <div class="dataTables_length" id="usersDataTable_length"><label>Xem <select name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> mục</label></div>
+            <div class="dataTables_length" id="usersDataTable_length">
+              <label>Xem 
+                <select [(ngModel)]="paging.perPage" name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  </select>
+                   mục</label></div>
           </div>
           <div class="col-sm-6">
             <div id="usersDataTable_filter" class="dataTables_filter"><label>Tìm kiếm:<input type="search" class="form-control input-sm" placeholder="" aria-controls="usersDataTable"></label></div>
@@ -75,7 +83,8 @@
           <div class="col-lg-12 col-md-12">
             <div style="text-align: center">
               <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
-              <pagination-controls class="pagination" (pageChange)="getPage($event)" id="server"></pagination-controls>
+              <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
+              <!--<pagination-controls class="pagination" (pageChange)="getPage($event)" id="server"></pagination-controls>-->
             </div>
           </div>
         </div>

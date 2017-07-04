@@ -67,6 +67,11 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
 
   ) {
     this.toastyConfig.theme = 'material';
+
+  }
+
+  ngOnInit() {
+    this.active = JSON.parse(localStorage.getItem("active"));
     this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd) {
@@ -74,18 +79,14 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
           this.typeComponent = "edit";
           this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.fetchActivity(this.id);
+            if (this.id)
+              this.fetchActivity(this.id);
           });
         } else {
           this.typeComponent = "new";
         }
       }
     });
-  }
-
-  ngOnInit() {
-    this.active = JSON.parse(localStorage.getItem("active"));
-
     // this.organizationService.getAll().subscribe(
     //   data => {
     //     this.organizations = data;
@@ -175,7 +176,8 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
           this.data.pointTranning = dataJs.pointTranning;
           this.picker.datePicker.setStartDate(dataJs.startDate);
           this.picker.datePicker.setEndDate(dataJs.endDate);
-          this.editor.setContent(dataJs.description);
+          this.editor.setContent(dataJs.description ? dataJs.description : "");
+          this.imgSrc = this.getLinkImg(dataJs.imgUrl);
         }
       },
       error => {
@@ -331,5 +333,10 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.createActivity(formData);
       }
     }
+  }
+  getLinkImg(fileName: string) {
+    if (fileName)
+      return "http://localhost:8081/files/" + fileName;
+    return "http://localhost:8081/files/hcmute.png";
   }
 }

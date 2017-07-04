@@ -151,5 +151,9 @@ export class MarkComponent implements OnInit {
   isEmpty() {
     return (this.registers.length === 0) ? true : false;
   }
-
+  getLinkImg(fileName: string) {
+    if (fileName)
+      return "http://localhost:8081/files/" + fileName;
+    return "http://localhost:8081/files/hcmute.png";
+  }
 }
