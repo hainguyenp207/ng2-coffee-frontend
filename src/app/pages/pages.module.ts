@@ -50,6 +50,7 @@ import { PagesComponent } from './pages.component';
 import { IndexComponent } from './main/index/index.component';
 import { PostComponent } from './main/components/post/post.component';
 //import { PagesModule } from './pages.module';
+import { FacebookModule } from 'ngx-facebook';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { PostComponent } from './main/components/post/post.component';
         MomentModule,
         NgSpinKitModule,
         LoadingAnimateModule.forRoot(),
-        NgxPaginationModule
+        NgxPaginationModule,
+        FacebookModule.forRoot(),
     ],
     declarations: [PagesComponent,
         UsersComponent,

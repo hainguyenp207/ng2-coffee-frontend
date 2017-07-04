@@ -2,6 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
+            <h1 *ngIf="activities.length<=0" style="text-align: center; font-weight: bold; font-size: 38pt">
+                Chưa hoạt động nào được đăng tải
+            </h1>
             <div *ngFor="let activity of activities | paginate: { id: 'server', itemsPerPage:
                 paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total }">
                 <main-activity [data]="activity"></main-activity>

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { } from './pages/main/components/header/header.component'
+import { HeaderComponent } from './pages/main/components/header/header.component'
+import { SharedData } from './shared-data';
 
 
 @Component({
@@ -15,10 +16,17 @@ export class MainComponent {
   authentication = {};
   data: any;
   isLoginPath: any = '';
-  constructor(private route: ActivatedRoute) {
-    console.log(route.url);
+  constructor(private route: ActivatedRoute,
+    private _router: Router,
+    private _sharedData: SharedData) {
+    // if (!this._router.registry.hasRoute("Child", MainComponent))
+    //   _sharedData.data = this.data;
   }
+
   ngOnInit() {
+  }
+  onNotify(e: any) {
+    this._sharedData.emitChange(e);
   }
 
 }

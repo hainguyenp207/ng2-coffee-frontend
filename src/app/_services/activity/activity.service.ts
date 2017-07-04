@@ -63,6 +63,22 @@ export class ActivityService {
     countActivityConfirm() {
         return this.http.get(this.backendAPI + "count/confirm", this.jwt()).map((response: Response) => response);
     }
+    /**
+     * Activities public
+     * @param orgId
+     */
+    countActivityOrgPublic(orgId: string) {
+        return this.http.get(`${this.backendAPI}count/public?org=${orgId}`, this.jwt()).map((response: Response) => response);
+    }
+    countActivityPublic() {
+        return this.http.get(this.backendAPI + "count/public", this.jwt()).map((response: Response) => response);
+    }
+    getActivitiesPublicOrgPaging(orgId: string, page: number, size: number) {
+        return this.http.get(this.backendAPI + `organizations/${orgId}/public?page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
+    getActivitiesPublicPaging(page: number, size: number) {
+        return this.http.get(this.backendAPI + `public?page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
     create(activity: any) {
         return this.http.post(this.backendAPI, activity, this.jwt2()).map((response: Response) => response);
     }
@@ -75,7 +91,12 @@ export class ActivityService {
         return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
 
-
+    searchActivities(keyword: string, page: Number, size: Number) {
+        return this.http.get(this.backendAPI + `public/search?q=${keyword}&page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
+    searchActivitiesByOrg(keyword: string, orgId: string, page: Number, size: Number) {
+        return this.http.get(this.backendAPI + `public/search?q=${keyword}&organization_id=${orgId}&page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
     // private helper methods
 
     private jwt() {

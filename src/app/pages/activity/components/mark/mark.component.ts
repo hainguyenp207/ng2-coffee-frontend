@@ -44,7 +44,7 @@ export class MarkComponent implements OnInit {
   ngOnInit() {
   }
   /**
-   * Fetch register
+   * Fetch registers
    */
   fetchRegister(idActivity: string) {
     this.registerService.getAll(idActivity).subscribe(

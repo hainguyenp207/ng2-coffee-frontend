@@ -5,7 +5,8 @@ import { PostComponent } from './pages/main/components/post/post.component'
 
 export const routes: Routes = [
     { path: '', component: IndexComponent, pathMatch: 'full' },
-    { path: 'activities/post/:id', component: PostComponent, pathMatch: 'full' }
+    { path: 'activities/post/:id', component: PostComponent, pathMatch: 'full' },
+    { path: 'organizations/:id', component: IndexComponent, pathMatch: 'full' }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });

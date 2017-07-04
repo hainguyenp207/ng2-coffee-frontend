@@ -36,7 +36,7 @@ import {
   LoadingAnimateModule, LoadingAnimateService,
 
 } from 'ng2-loading-animate';
-
+import { FacebookModule } from 'ngx-facebook';
 import { CfToastComponent } from './components/cf-toast/cf-toast.component';
 import { NewUserComponent } from './pages/users/components/new-user/new-user.component';
 import { EditUserComponent } from './pages/users/components/edit-user/edit-user.component';
@@ -64,6 +64,7 @@ import { PagesModule } from './pages/pages.module';
     FormsModule,
     HttpModule,
     routing,
+
     Angular2FontawesomeModule,
     InlineEditorModule,
     Daterangepicker,
@@ -72,7 +73,8 @@ import { PagesModule } from './pages/pages.module';
     LoadingAnimateModule.forRoot(),
     NgxPaginationModule,
     BrowserAnimationsModule,
-    PagesModule
+    PagesModule,
+    FacebookModule.forRoot(),
 
   ],
   providers: [

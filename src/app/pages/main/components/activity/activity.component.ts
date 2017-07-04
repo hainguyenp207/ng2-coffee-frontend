@@ -33,7 +33,7 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
+    document.title = "HCMUTE - Trường Đại học Sư phạm Kỹ Thuật TP.HCMUTE"
   }
   findFirstImg(content: string) {
 

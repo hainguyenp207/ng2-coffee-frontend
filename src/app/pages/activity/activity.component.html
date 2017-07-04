@@ -37,7 +37,7 @@
       <div class="card-box m-b-10" *ngFor="let activity of activities | paginate: { id: 'server', itemsPerPage: paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total }">
         <div class="table-box opport-box">
           <div class="table-detail">
-            <img src="../../assets/images/brand/envato.jpg" alt="img" class="img-circle thumb-lg m-r-15" />
+            <img src="{{getLinkImg(activity.imgUrl)}}" alt="img" class="img-circle thumb-lg m-r-15" />
           </div>
           <div class="table-detail">
             <div class="member-info">
@@ -66,7 +66,6 @@
             <ng-template [ngIf]="isFullPermission()">
               <a (click)="confirm(activity,activity.confirmed?false:true)" class="btn btn-sm waves-effect waves-light" [ngClass]="activity.confirmed?'btn-info':'btn-danger'">{{activity.confirmed?"Hủy duyệt":"Duyệt"}} </a>
             </ng-template>
-
             <ng-template [ngIf]="isFullPermission() || (isRoleOrg() && canEditActivity(activity.confirmed))">
               <a [routerLink]='getLinkEdit(activity.id)' class="btn btn-sm btn-danger">Sửa</a>
             </ng-template>

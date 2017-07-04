@@ -76,7 +76,6 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
             this.id = params['id'];
             this.fetchActivity(this.id);
           });
-
         } else {
           this.typeComponent = "new";
         }
@@ -86,7 +85,6 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit() {
     this.active = JSON.parse(localStorage.getItem("active"));
-
 
     // this.organizationService.getAll().subscribe(
     //   data => {
@@ -115,7 +113,6 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnDestroy() {
     tinymce.remove(this.editor);
   }
-
 
   // see original project for full list of options
   // can also be setup using the config service to apply to multiple pickers
@@ -179,7 +176,6 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
           this.picker.datePicker.setStartDate(dataJs.startDate);
           this.picker.datePicker.setEndDate(dataJs.endDate);
           this.editor.setContent(dataJs.description);
-          console.log(this.editor.getContent())
         }
       },
       error => {
@@ -279,11 +275,8 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = (e: any) => {
-        // $('#blah').attr('src', e);
         this.imgSrc = e.target.result;
-
       }
-
       reader.readAsDataURL(input.files[0]);
     }
   }
@@ -314,25 +307,14 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
       pointSocial: this.data.pointSocial
     };
     let formData: FormData = new FormData();
-    let file: File = this.img.files[0];
-    console.log(file);
-    formData.append('file', file);
-    formData.append('properties', JSON.stringify(activity));
-    // formData.append('description', this.editor.getContent());
-    // formData.append('startDate', this.daterange.start.format('DD-MM-YYYY HH:mm'));
-    // formData.append('endDate', this.daterange.end.format('DD-MM-YYYY HH:mm'));
-    // formData.append('organizationId', this.active.organization.id);
-    // formData.append('activityTypeId', '1');
-    // formData.append('pointTranning', this.data.pointTranning);
-    // formData.append('pointSocial', this.data.pointSocial);
-
-
-
-    console.log(this.img.files[0]);
-    console.log(formData);
+    if (this.img) {
+      let file: File = this.img.files[0];
+      formData.append('file', file);
+    }
+    formData.append('data', new Blob([JSON.stringify(activity)], {
+      type: "application/json"
+    }));
     let inputs = ["name"];
-
-
     this.hasFieldError = false;
     this.listFieldError = [];
     inputs.forEach(input => {
@@ -341,7 +323,6 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         this.hasFieldError = true;
       }
     })
-
     if (!this.hasFieldError) {
       this.isSubmited = true;
       if (this.typeComponent == "edit") {

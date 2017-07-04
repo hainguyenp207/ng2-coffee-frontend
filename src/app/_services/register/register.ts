@@ -36,6 +36,9 @@ export class RegisterService {
     getRegisterByUser(userId: string) {
         return this.http.get(this.backendRegister + "user/" + userId, this.jwt()).map((response: Response) => response);
     }
+    getRegisterOfUser(userId: string, activityId: string) {
+        return this.http.get(this.backendRegister + "users/" + userId + "/activities/" + activityId, this.jwt()).map((response: Response) => response);
+    }
     // Đếm tổng số hoạt động đăng ký của 1 user...
     countRegisterOfUser(userId: string) {
         return this.http.get(`${this.backendRegister}count/user_id=${userId}`, this.jwt()).map((response: Response) => response);
@@ -45,7 +48,7 @@ export class RegisterService {
         return this.http.get(`${this.backendRegister}count/activity_id=${activityId}`, this.jwt()).map((response: Response) => response);
     }
     create(register: Register) {
-        return this.http.post(this.backendActivity, register, this.jwt()).map((response: Response) => response);
+        return this.http.post(this.backendRegister, register, this.jwt()).map((response: Response) => response);
     }
 
     update(register: Register) {

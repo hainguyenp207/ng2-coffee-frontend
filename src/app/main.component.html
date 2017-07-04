@@ -1,17 +1,7 @@
-<main-header></main-header>
+<main-header (notify)='onNotify($event)'></main-header>
 <div class="container">
     <div class="row">
         <router-outlet></router-outlet>
     </div>
-    <div id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="twelve columns wrapper">
-                    Copyright © 2017 <a href="http://hcmute.edu.vn" id="copyright">HCMUTE</a>
-                    <div class="rightf" style="float:right"> : <a href="http://hcmute.edu.vn" id="mycontent">...</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+<main-footer></main-footer>

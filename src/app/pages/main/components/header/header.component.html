@@ -8,8 +8,9 @@
               <div class="header section" id="header">
                 <div class="widget Header">
                   <div id="header-inner">
-                    <a href="/" style="display: block">
-                        <img alt="Logo university" height="40px;" id="Header1_headerimg" src="http://hcmute.edu.vn/Resources/Images/SubDomain/HomePage/Nut/logo-news.png"
+                    <a [routerLink]="['/']" style="display: block">
+                        <img alt="Logo university" height="40px;" 
+                         src="http://hcmute.edu.vn/Resources/Images/SubDomain/HomePage/Nut/logo-news.png"
                          style="display: block" width="140px; "/>
                     </a>
                   </div>
@@ -19,17 +20,21 @@
             <div class="header_right">
               <div class="menu-navigation-container" id="top_menu">
                 <ul class="sf-menu sf-js-enabled sf-shadow" id="mainmenu">
-                  <li class="current-menu-item"><a href="#">Trang chủ</a></li>
-                  <li><a href="#">Nổi bật</a></li>
+                  <li class="current-menu-item">
+                    <a [routerLink]="['/']">Trang chủ</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/']">Nổi bật</a>
+                  </li>
                   <li class="">
                     <a href="#" class="sf-with-ul">
                       Danh sách
                       <span class="sf-sub-indicator"> » </span>
                       </a>
-                    <ul class="sub-menu" style="display: none; visibility: hidden;">
-                      <li><a href="#">Công nghệ thông tin</a></li>
-                      <li><a href="#">Hội sinh viên</a></li>
-                      <li><a href="#">CLB Kỹ Năng</a></li>
+                    <ul class="sub-menu">
+                      <li *ngFor="let org of orgs">
+                        <a href="#/organizations/{{org.id}}">{{org.name}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li><a href="{{getLinkLogin()}}">{{!accessToken?"Đăng nhập":userName}}</a></li>
@@ -37,8 +42,8 @@
                 <div class="search-bar">
                   <div class="nav-search">
                     <form action="/search" id="searchform" method="get" role="search">
-                      <input class="search_input" id="s" name="q" onblur="if(this.value=='')this.value=this.defaultValue;" onfocus="if(this.value==this.defaultValue)this.value=''"
-                        type="text" value="Tìm kiếm">
+                      <input class="search_input" (input)="onSearchChange($event.target.value)" id="s" name="q" onblur="if(this.value=='')this.value=this.defaultValue;"
+                        onfocus="if(this.value==this.defaultValue)this.value=''" type="text" value="Tìm kiếm">
                     </form>
                     <div class="srch_btn"></div>
                   </div>

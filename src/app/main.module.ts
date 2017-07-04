@@ -10,10 +10,11 @@ import { MainComponent } from './main.component';
 import { AlertComponent, } from './components/alert/alert.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './pages/main/components/header/header.component';
+import { FooterComponent } from './pages/main/components/footer/footer.component';
 import { IndexComponent } from './pages/main/index.component';
 import { PostComponent } from './pages/main/components/post/post.component';
 import { ActivityComponent } from './pages/main/components/activity/activity.component';
-
+import { FacebookModule } from 'ngx-facebook';
 import {
   AlertService, AuthenticationService, UserService,
   OrganizationService, ActivityService, RoleService,
@@ -25,7 +26,6 @@ import { MemberComponent } from './pages/member/member.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ScoreComponent } from './pages/member/score/score.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 import { InlineEditorModule } from 'ng2-inline-editor';
@@ -42,7 +42,7 @@ import { ActivityManagementComponent } from './pages/member/activity-management/
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PageForbiddenComponent } from './pages/page-forbidden/page-forbidden.component';
 import { PageInternalErrorComponent } from './pages/page-internal-error/page-internal-error.component';
-
+import { SharedData } from './shared-data'
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import { PageInternalErrorComponent } from './pages/page-internal-error/page-int
     PageForbiddenComponent,
     PageInternalErrorComponent,
     HeaderComponent,
+    FooterComponent,
     IndexComponent,
     ActivityComponent,
     PostComponent
@@ -64,11 +65,13 @@ import { PageInternalErrorComponent } from './pages/page-internal-error/page-int
     Angular2FontawesomeModule,
     InlineEditorModule,
     ToastyModule.forRoot(),
+    FacebookModule.forRoot(),
     MomentModule,
     NgSpinKitModule,
     LoadingAnimateModule.forRoot(),
     NgxPaginationModule,
     BrowserAnimationsModule,
+
   ],
   providers: [
     AuthenticationService,
@@ -78,6 +81,7 @@ import { PageInternalErrorComponent } from './pages/page-internal-error/page-int
     ActivityService,
     RegisterService,
     LoadingAnimateService,
+    SharedData
 
   ],
   bootstrap: [MainComponent]

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Activity, Organization } from "app/_models/index";
+import { ActivityService, OrganizationService } from 'app/_services/index';
 
 @Component({
   selector: 'main-header',
@@ -6,19 +8,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  @Output()
+  notify: EventEmitter<string> = new EventEmitter<string>();
   private url: any = 'http://localhost:9002/#/login';
   private returnUrl: any = 'http://localhost:9000'
   private accessToken: any = '';
   private userName: any = '';
-  constructor() { }
+  private orgs: Array<Organization> = new Array;
+  constructor(
+    private orgService: OrganizationService
+  ) {
+    this.fetchOrg();
+  }
 
   ngOnInit() {
     this.accessToken = localStorage.getItem('token');
     this.userName = localStorage.getItem('userName');
   }
+  fetchOrg() {
+    this.orgService.getAll().subscribe(
+      data => {
+        console.log(this.orgs);
+        this.orgs = data.json();
+      },
+      error => {
+        let dataJs = error.json();
+        console.log(dataJs);
+      });
+  }
   getLinkLogin() {
     return this.url + "?return_url=" + this.returnUrl;
   }
-
+  onSearchChange(e: any) {
+    setTimeout(() => {
+      this.notify.emit(e);
+    }, 500)
+  }
 }
