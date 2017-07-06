@@ -89,12 +89,12 @@
 
   <div class="modal fade" bsModal #orgModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content" style="padding:0;border-color: none">
         <h4 class="custom-modal-title">Xóa hoạt động</h4>
         <div class="custom-modal-text text-left">
           <h3>Bạn có muốn xóa hoạt động này không?</h3>
-          <button type="button" (click)="delete(currentActivity.id)" class="btn btn-default waves-effect waves-light">Lưu</button>
+          <button type="button" (click)="delete(currentActivity.id)" class="btn btn-default waves-effect waves-light">Xóa</button>
           <button type="button" class="btn btn-danger waves-effect waves-light m-l-10" (click)="hideModal()">Hủy</button>
         </div>
       </div>

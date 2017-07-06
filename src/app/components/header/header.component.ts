@@ -14,15 +14,19 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
-  ) { }
-
-  ngOnInit() {
+  ) {
     let data = localStorage.getItem("data");
     if (data) {
       let dataJs = JSON.parse(data);
       this.permissions = dataJs.permissions;
       this.currentPermission = dataJs.active;
+    } else {
+      this.router.navigateByUrl('/login');
     }
+  }
+
+  ngOnInit() {
+
   }
   setOrganization(organizationId: String) {
     let roleId = "";
@@ -33,7 +37,7 @@ export class HeaderComponent implements OnInit {
     let data = JSON.parse(this.currentPermission);
     data.organization.id = organizationId;
     data.role.id = roleId;
-    localStorage.setItem("active", data);
+    localStorage.setItem("active", JSON.stringify(data));
   }
   logout() {
     this.authenticationService.logout();

@@ -42,7 +42,6 @@ export class ActivityManagementComponent implements OnInit {
   }
   fetchRegisterByUser(userId: string) {
     this.registerService.getRegisterByUser(userId).subscribe(data => {
-      console.log(data);
       this.registers = data.json();
     },
       error => {
@@ -82,5 +81,10 @@ export class ActivityManagementComponent implements OnInit {
   }
   isEmpty() {
     return (this.registers.length === 0) ? true : false;
+  }
+  getLinkImg(fileName: string) {
+    if (fileName)
+      return "http://localhost:8081/files/" + fileName;
+    return "http://localhost:8081/files/hcmute.png";
   }
 }

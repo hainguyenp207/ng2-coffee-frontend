@@ -35,8 +35,10 @@ export class ActivityComponent implements OnInit {
   ngOnInit() {
     document.title = "HCMUTE - Trường Đại học Sư phạm Kỹ Thuật TP.HCMUTE"
   }
-  findFirstImg(content: string) {
-
+  getLinkImg(fileName: string) {
+    if (fileName)
+      return "http://localhost:8081/files/" + fileName;
+    return "http://localhost:8081/files/hcmute.png";
   }
 
 

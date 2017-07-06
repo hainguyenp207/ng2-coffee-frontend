@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
       this.permissions = dataJs.permissions;
       this.currentPermission = permissionJs;
     } else {
+      console.log("Ko co data");
       this.router.navigateByUrl('/login');
     }
   }

@@ -86,6 +86,9 @@ export class ActivityService {
     update(activity: any) {
         return this.http.put(this.backendAPI + activity.id, activity, this.jwt2()).map((response: Response) => response);
     }
+    updateNoFile(activity: any) {
+        return this.http.put(this.backendAPI + activity.id + "/form", activity, this.jwt()).map((response: Response) => response);
+    }
 
     delete(id: string) {
         return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);

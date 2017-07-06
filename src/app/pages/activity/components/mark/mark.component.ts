@@ -75,6 +75,7 @@ export class MarkComponent implements OnInit {
         let dataJs = data.json();
         if (data.status === 200) {
           this.activity = dataJs;
+          console.log(this.activity)
         }
       },
       error => {
@@ -91,22 +92,20 @@ export class MarkComponent implements OnInit {
         }
       });
   }
-  onChangeJoined(e, idRegister: string, userId: string, joined: boolean,
-    pointSocial: number, pointTranning: number) {
-    console.log(e.target.checked);
-    this.updateRegister(idRegister, userId, e.target.checked, pointSocial, pointTranning);
+  onChangeJoined(e, idRegister: string, userId: string, joined: boolean, ) {
+    this.updateRegister(idRegister, userId, e.target.checked);
   }
-  updateRegister(idRegister: string, userId: string, joined: boolean,
-    pointSocial: number, pointTranning: number
-
+  updateRegister(idRegister: string, userId: string, joined: boolean
   ) {
+
     let reg = new Register();
     reg.id = idRegister;
     reg.joined = joined;
-    reg.pointSocial = pointSocial;
-    reg.pointTranning = pointTranning;
+    reg.pointSocial = this.activity.pointSocial;
+    reg.pointTranning = this.activity.pointTranning;
     reg.activityId = this.id;
     reg.userId = userId;
+    console.log(reg)
     this.registerService.update(reg).subscribe(
       data => {
         this.addToast("Cập nhập thành công", 2000, "success");

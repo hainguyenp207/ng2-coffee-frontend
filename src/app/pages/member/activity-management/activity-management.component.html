@@ -35,7 +35,7 @@
     <div class="card-box m-b-10" *ngFor="let register of registers">
       <div class="table-box opport-box">
         <div class="table-detail">
-          <img src="../../assets/images/brand/envato.jpg" alt="img" class="img-circle thumb-lg m-r-15" />
+          <img src="{{getLinkImg(register.activity.imgUrl)}}" alt="img" class="img-circle thumb-lg m-r-15" />
         </div>
         <div class="table-detail">
           <div class="member-info">
@@ -49,7 +49,7 @@
           <p class="text-dark m-b-5"><b>Ngày kết thúc: </b> <span class="text-muted">{{register.activity.endDate}}</span></p>
         </div>
         <div class="table-detail lable-detail">
-          <span class="label label-info">{{register.activity.enabled}}</span>
+          <span class="label label-info">{{register.joined?"Đã tham gia":"Chưa tham gia"}}</span>
         </div>
       </div>
     </div>

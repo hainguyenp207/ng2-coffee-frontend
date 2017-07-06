@@ -147,7 +147,7 @@ export class ActivityComponent implements OnInit {
   }
   confirm(activity: any, confirm: boolean) {
     activity.confirmed = confirm;
-    this.activityService.update(activity).subscribe(
+    this.activityService.updateNoFile(activity).subscribe(
       data => {
         this.handleSuccess(data);
       },

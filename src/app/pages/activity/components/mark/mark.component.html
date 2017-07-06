@@ -64,10 +64,10 @@
                   <td class="sorting_1">{{i+1}}</td>
                   <td>{{register.user.username}}</td>
                   <td>{{register.user.name}}</td>
-                  <td>{{register.startDate}}</td>
+                  <td>{{register.createdDate}}</td>
                   <td>
-                    <div class="checkbox checkbox-success"><input id="checkbox3" (change)="onChangeJoined($event, register.id,register.user.username, register.pointSocial, register.pointTranning)"
-                        type="checkbox" [checked]="register.joined" /> <label for="checkbox3"></label> </div>
+                    <div class="checkbox checkbox-success"><input id="checkbox3" (change)="onChangeJoined($event, register.id,register.user.username)" type="checkbox"
+                        [checked]="register.joined" /> <label for="checkbox3"></label> </div>
                   </td>
                 </tr>
                 <tr *ngIf="isEmpty()">
