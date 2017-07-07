@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "ng": "ng",
    "start": "http-server",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
