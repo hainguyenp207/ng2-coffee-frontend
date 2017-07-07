@@ -6,8 +6,8 @@ import { BACKEND_SERVICE_HOST, BACKEND_SERVICE_PORT } from '../../_constants/con
 
 @Injectable()
 export class RegisterService {
-    backendActivity = `${BACKEND_SERVICE_HOST}:${BACKEND_SERVICE_PORT}/api/v1/activities/`;
-    backendRegister = `${BACKEND_SERVICE_HOST}:${BACKEND_SERVICE_PORT}/api/v1/registers/`;
+    backendActivity = `${BACKEND_SERVICE_HOST}/api/v1/activities/`;
+    backendRegister = `${BACKEND_SERVICE_HOST}/api/v1/registers/`;
 
     constructor(private http: Http) { }
     getTokenFromLocalStorage() {

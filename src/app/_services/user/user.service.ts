@@ -6,7 +6,7 @@ import { BACKEND_SERVICE_HOST, BACKEND_SERVICE_PORT } from '../../_constants/con
 
 @Injectable()
 export class UserService {
-    backendAPI = `${BACKEND_SERVICE_HOST}:${BACKEND_SERVICE_PORT}/api/v1/users/`;
+    backendAPI = `${BACKEND_SERVICE_HOST}/api/v1/users/`;
 
     constructor(private http: Http) { }
     getTokenFromLocalStorage() {

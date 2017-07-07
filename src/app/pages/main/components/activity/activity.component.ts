@@ -37,8 +37,8 @@ export class ActivityComponent implements OnInit {
   }
   getLinkImg(fileName: string) {
     if (fileName)
-      return "http://localhost:8081/files/" + fileName;
-    return "http://localhost:8081/files/hcmute.png";
+      return "http://https://backend-social.herokuapp.com/files/" + fileName;
+    return "http://https://backend-social.herokuapp.com/files/hcmute.png";
   }
 
 

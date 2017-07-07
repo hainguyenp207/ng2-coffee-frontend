@@ -6,7 +6,7 @@ import { BACKEND_SERVICE_HOST, BACKEND_SERVICE_PORT } from '../../_constants/con
 
 @Injectable()
 export class AuthenticationService {
-  backendAPI = `${BACKEND_SERVICE_HOST}:${BACKEND_SERVICE_PORT}`;
+  backendAPI = `${BACKEND_SERVICE_HOST}`;
   constructor(private http: Http) { }
 
   login(username: string, password: string) {

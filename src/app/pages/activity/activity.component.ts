@@ -171,7 +171,7 @@ export class ActivityComponent implements OnInit {
     this.orgModal.hide();
   }
   getLinkImg(fileName: string) {
-    return "http://localhost:8081/files/" + fileName;
+    return "http://https://backend-social.herokuapp.com/files/" + fileName;
   }
   addToast(message, timeOut, type) {
     // Or create the instance of ToastOptions
