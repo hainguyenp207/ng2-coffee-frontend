@@ -63,10 +63,11 @@
         }
         
         body {
-            background: #fff url(../images/background.jpg)fixed center;
+            background: #fff url(../images/background-2.jpg) no-repeat center;
             color: #666666;
             font: 400 13px/1.6 Arial, "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
             word-wrap: break-word;
+            background-size: cover
         }
         
         a {

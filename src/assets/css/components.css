@@ -48,8 +48,8 @@ File: Components
 .btn-default:focus,
 .btn-default:hover,
 .open > .dropdown-toggle.btn-default {
-  background-color: #7e57c2 !important;
-  border: 1px solid #7e57c2 !important;
+  background-color: #0e76bc !important;
+  border: 1px solid #0e76bc !important;
 }
 .btn-white,
 .btn-white:hover,
@@ -111,8 +111,8 @@ File: Components
 .btn-primary:focus,
 .btn-primary:hover,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #5d9cec !important;
-  border: 1px solid #5d9cec !important;
+  background-color: #0e76bc !important;
+  border: 1px solid #0e76bc !important;
 }
 .btn-success,
 .btn-success:hover,
@@ -209,10 +209,10 @@ File: Components
   border-width: 2px !important;
 }
 .btn-custom.btn-default {
-  color: #7e57c2 !important;
+  color: #0e76bc !important;
 }
 .btn-custom.btn-primary {
-  color: #5d9cec !important;
+  color: #0e76bc !important;
 }
 .btn-custom.btn-success {
   color: #81c868 !important;
@@ -438,15 +438,15 @@ File: Components
   height: 17px;
 }
 .checkbox-custom input[type="checkbox"]:checked + label::before {
-  background-color: #7e57c2;
-  border-color: #7e57c2;
+  background-color: #0e76bc;
+  border-color: #0e76bc;
 }
 .checkbox-custom input[type="checkbox"]:checked + label::after {
   color: #ffffff;
 }
 .checkbox-primary input[type="checkbox"]:checked + label::before {
-  background-color: #5d9cec;
-  border-color: #5d9cec;
+  background-color: #0e76bc;
+  border-color: #0e76bc;
 }
 .checkbox-primary input[type="checkbox"]:checked + label::after {
   color: #ffffff;
@@ -575,22 +575,22 @@ File: Components
   height: 17px;
 }
 .radio-custom input[type="radio"] + label::after {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
 }
 .radio-custom input[type="radio"]:checked + label::before {
-  border-color: #7e57c2;
+  border-color: #0e76bc;
 }
 .radio-custom input[type="radio"]:checked + label::after {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
 }
 .radio-primary input[type="radio"] + label::after {
-  background-color: #5d9cec;
+  background-color: #0e76bc;
 }
 .radio-primary input[type="radio"]:checked + label::before {
-  border-color: #5d9cec;
+  border-color: #0e76bc;
 }
 .radio-primary input[type="radio"]:checked + label::after {
-  background-color: #5d9cec;
+  background-color: #0e76bc;
 }
 .radio-danger input[type="radio"] + label::after {
   background-color: #f05050;
@@ -688,10 +688,10 @@ File: Components
   color: #ffffff;
 }
 .panel-custom > .panel-heading {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
 }
 .panel-primary > .panel-heading {
-  background-color: #5d9cec;
+  background-color: #0e76bc;
 }
 .panel-success > .panel-heading {
   background-color: #81c868;
@@ -723,12 +723,12 @@ File: Components
   padding: 15px 20px 20px 20px;
 }
 .panel-border.panel-custom .panel-heading {
-  border-color: #7e57c2 !important;
-  color: #7e57c2 !important;
+  border-color: #0e76bc !important;
+  color: #0e76bc !important;
 }
 .panel-border.panel-primary .panel-heading {
-  border-color: #5d9cec !important;
-  color: #5d9cec !important;
+  border-color: #0e76bc !important;
+  color: #0e76bc !important;
 }
 .panel-border.panel-success .panel-heading {
   border-color: #81c868 !important;
@@ -953,7 +953,7 @@ File: Components
   line-height: 20px;
 }
 .progress-bar-primary {
-  background-color: #5d9cec;
+  background-color: #0e76bc;
 }
 .progress-bar-success {
   background-color: #81c868;
@@ -977,7 +977,7 @@ File: Components
   background-color: #fb6d9d;
 }
 .progress-bar-custom {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
 }
 .progress-animated {
   -webkit-animation-duration: 5s;
@@ -1096,11 +1096,11 @@ th {
   border: 1px solid #ebeff2;
 }
 table.focus-on tbody tr.focused th {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
   color: #ffffff;
 }
 table.focus-on tbody tr.focused td {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
   color: #ffffff;
 }
 .table-rep-plugin .table-responsive {
@@ -1169,8 +1169,8 @@ table.focus-on tbody tr.focused td {
   cursor: not-allowed;
 }
 .table-rep-plugin .checkbox-row input[type="checkbox"]:checked + label::before {
-  background-color: #7e57c2;
-  border-color: #7e57c2;
+  background-color: #0e76bc;
+  border-color: #0e76bc;
 }
 .table-rep-plugin .checkbox-row input[type="checkbox"]:checked + label::after {
   color: #ffffff;
@@ -1349,7 +1349,7 @@ table[data-toggle="table"] {
 .tablesaw-enhanced .tablesaw-bar .btn:hover,
 .tablesaw-enhanced .tablesaw-bar .btn:focus,
 .tablesaw-enhanced .tablesaw-bar .btn:active {
-  color: #7e57c2 !important;
+  color: #0e76bc !important;
   background-color: #ebeff2;
   outline: none !important;
   box-shadow: none !important;
@@ -1362,7 +1362,7 @@ table[data-toggle="table"] {
 /* Key Table */
 table.dataTable th.focus,
 table.dataTable td.focus {
-  outline: 3px solid #7e57c2 !important;
+  outline: 3px solid #0e76bc !important;
   outline-offset: -1px;
 }
 /* ColVid Tables */
@@ -1378,8 +1378,8 @@ button.ColVis_Button,
   background: none;
   box-shadow: none;
   color: #ffffff !important;
-  background-color: #7e57c2 !important;
-  border: 1px solid #7e57c2 !important;
+  background-color: #0e76bc !important;
+  border: 1px solid #0e76bc !important;
 }
 .dataTables_length {
   float: left;
@@ -1446,7 +1446,7 @@ ul.ColVis_collection li {
   color: #797979;
 }
 .jsgrid-pager-page.jsgrid-pager-current-page {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
   color: #ffffff;
 }
 .jsgrid-pager-nav-button a {
@@ -1454,7 +1454,7 @@ ul.ColVis_collection li {
   font-weight: 600;
 }
 .jsgrid-pager-nav-button a:hover {
-  color: #7e57c2;
+  color: #0e76bc;
 }
 .jsgrid .jsgrid-button {
   width: 24px;
@@ -1521,7 +1521,7 @@ ul.ColVis_collection li {
 }
 .widget-bg-color-icon .bg-icon-primary {
   background-color: rgba(93, 156, 236, 0.2);
-  border: 1px solid #5d9cec;
+  border: 1px solid #0e76bc;
 }
 .widget-bg-color-icon .bg-icon-pink {
   background-color: rgba(251, 109, 157, 0.2);
@@ -1537,7 +1537,7 @@ ul.ColVis_collection li {
 }
 .widget-bg-color-icon .bg-icon-custom {
   background-color: rgba(126, 87, 194, 0.2);
-  border: 1px solid #7e57c2;
+  border: 1px solid #0e76bc;
 }
 .widget-bg-color-icon .bg-icon-warning {
   background-color: rgba(255, 189, 74, 0.2);
@@ -1809,8 +1809,8 @@ ul.ColVis_collection li {
   font-size: 20px;
 }
 .table-actions-bar .table-action-btn:hover {
-  color: #7e57c2;
-  border-color: #7e57c2;
+  color: #0e76bc;
+  border-color: #0e76bc;
 }
 /* Transaction */
 .transaction-list li {
@@ -2048,13 +2048,13 @@ ul.ColVis_collection li {
 .datepicker table tr td span.active:hover[disabled],
 .datepicker table tr td span.active.disabled[disabled],
 .datepicker table tr td span.active.disabled:hover[disabled] {
-  background-color: #7e57c2;
+  background-color: #0e76bc;
 }
 .datepicker table tr td.active,
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active.disabled,
 .datepicker table tr td.active.disabled:hover {
-  background-color: #7e57c2 !important;
+  background-color: #0e76bc !important;
   background-image: none;
   box-shadow: none;
   text-shadow: none;
@@ -2068,8 +2068,8 @@ ul.ColVis_collection li {
 }
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
-  background-color: #5d9cec;
-  border-color: #5d9cec;
+  background-color: #0e76bc;
+  border-color: #0e76bc;
 }
 .daterangepicker .input-mini.active {
   border: 1px solid #AAAAAA;
@@ -2093,8 +2093,8 @@ ul.ColVis_collection li {
 }
 .daterangepicker .ranges li.active,
 .daterangepicker .ranges li:hover {
-  background-color: #5d9cec;
-  border: 1px solid #5d9cec;
+  background-color: #0e76bc;
+  border: 1px solid #0e76bc;
   color: #ffffff;
 }
 .search-input {
@@ -2108,10 +2108,10 @@ ul.ColVis_collection li {
   box-shadow: none;
 }
 .ms-container .ms-selectable li.ms-hover {
-  background-color: #5d9cec;
+  background-color: #0e76bc;
 }
 .ms-container .ms-selection li.ms-hover {
-  background-color: #5d9cec;
+  background-color: #0e76bc;
 }
 .note-editor {
   border: 1px solid #eeeeee !important;
@@ -2155,7 +2155,7 @@ ul.ColVis_collection li {
   background-color: transparent;
   border-color: transparent;
   border-radius: 4px;
-  color: #5d9cec;
+  color: #0e76bc;
   text-decoration: none;
 }
 .editor-horizontal .popover-content {
@@ -2214,16 +2214,16 @@ ul.ColVis_collection li {
   border: 1px solid #eaeaea;
 }
 .wizard > .steps .current a {
-  background: #7e57c2;
+  background: #0e76bc;
 }
 .wizard > .steps .current a:hover {
-  background: #7e57c2;
+  background: #0e76bc;
 }
 .wizard > .steps .current a:hover .number {
   color: #ffffff;
 }
 .wizard > .steps .current a:active {
-  background: #7e57c2;
+  background: #0e76bc;
 }
 .wizard > .steps .current a:active .number {
   color: #ffffff;
@@ -2247,17 +2247,17 @@ ul.ColVis_collection li {
   border-radius: 2px;
 }
 .wizard > .actions a {
-  background: #7e57c2;
+  background: #0e76bc;
   border-radius: 2px;
   color: #ffffff;
 }
 .wizard > .actions a:hover {
-  background: #7e57c2;
+  background: #0e76bc;
   border-radius: 2px;
   color: #ffffff;
 }
 .wizard > .actions a:active {
-  background: #7e57c2;
+  background: #0e76bc;
   border-radius: 2px;
   color: #ffffff;
 }

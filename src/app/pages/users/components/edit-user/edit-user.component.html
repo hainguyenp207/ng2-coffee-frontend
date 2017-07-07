@@ -1,108 +1,110 @@
-<div class="col-md-12">
-  <div class="card-box">
-    <ng2-toasty [position]="'top-right'"></ng2-toasty>
-    <div class="custom-modal-text text-left">
-      <form role="form" #f="ngForm" novalidate>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="username" class="col-md-4 col-sm-4">Tên đăng nhập</label>
-              <div class="col-md-8 col-sm-8">
-                <inline-editor type="text" [(ngModel)]="user.username" (onSave)="updateUser($event)" name="username"></inline-editor>
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+    <div class="card-box" style="font-size: 12pt">
+      <ng2-toasty [position]="'top-right'"></ng2-toasty>
+      <div class="custom-modal-text text-left">
+        <form role="form" #f="ngForm" novalidate>
+          <h3 style="font-size: 16; font-weight: bold">Thông tin</h3>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="username" class="col-md-4 col-sm-4">Tên đăng nhập</label>
+                <div class="col-md-8 col-sm-8">
+                  <inline-editor type="text" [(ngModel)]="user.username" (onSave)="updateUser($event)" name="username"></inline-editor>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="name" class="col-md-4 col-sm-4">Họ tên</label>
-              <div class="col-md-8 col-sm-8">
-                <inline-editor type="text" [(ngModel)]="user.name" (onSave)="updateUser($event)" name="name"></inline-editor>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="name" class="col-md-4 col-sm-4">Họ tên</label>
+                <div class="col-md-8 col-sm-8">
+                  <inline-editor type="text" [(ngModel)]="user.name" (onSave)="updateUser($event)" name="name"></inline-editor>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="email" class="col-md-4 col-sm-4">Email</label>
-              <div class="col-md-8 col-sm-8">
-                <inline-editor type="text" [(ngModel)]="user.email" (onSave)="updateUser($event)" name="email"></inline-editor>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="email" class="col-md-4 col-sm-4">Email</label>
+                <div class="col-md-8 col-sm-8">
+                  <inline-editor type="text" [(ngModel)]="user.email" (onSave)="updateUser($event)" name="email"></inline-editor>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="password" class="col-md-4 col-sm-4">Mật khẩu</label>
-              <div class="col-md-8 col-sm-8">
-                <inline-editor type="password" [(ngModel)]="user.password" (onSave)="updateUser($event)" name="password"></inline-editor>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="password" class="col-md-4 col-sm-4">Mật khẩu</label>
+                <div class="col-md-8 col-sm-8">
+                  <inline-editor type="password" [(ngModel)]="user.password" (onSave)="updateUser($event)" name="password"></inline-editor>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-5 col-xs-5">
-            <div class="form-group">
-              <label class="col-md-3 col-sm-3">Tổ chức</label>
-              <select #selectedOrg name="orgId" class="form-control selectpicker" data-style="btn-white">
+          <div class="row">
+            <div class="col-md-5 col-xs-5">
+              <div class="form-group">
+                <label class="col-md-3 col-sm-3">Tổ chức</label>
+                <select #selectedOrg name="orgId" class="form-control selectpicker" data-style="btn-white">
                 <option *ngFor="let org of orgs" value="{{org.id}}">{{org.name}}</option>
               </select>
 
+              </div>
             </div>
-          </div>
-          <div class="col-md-5 col-xs-5">
-            <div class="form-group">
-              <label for="status">Vai trò</label>
-              <select #selectedRole name="roleId" class="form-control selectpicker" data-style="btn-white">
+            <div class="col-md-5 col-xs-5">
+              <div class="form-group">
+                <label for="status">Vai trò</label>
+                <select #selectedRole name="roleId" class="form-control selectpicker" data-style="btn-white">
                            <option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</option>
                           
                        </select>
+              </div>
             </div>
-          </div>
-          <div class="col-md-2 col-xs-2">
-            <div class="form-group" style="padding-top: 24px">
-              <button type="button" (click)="addRole(selectedRole,selectedOrg)" class="btn btn-primary form-control">
+            <div class="col-md-2 col-xs-2">
+              <div class="form-group" style="padding-top: 24px">
+                <button type="button" (click)="addRole(selectedRole,selectedOrg)" class="btn btn-primary form-control">
                   Thêm
               </button>
+              </div>
+            </div>
+            <hr>
+
+          </div>
+          <div class="row" *ngIf="dataRoles.length>0">
+            <div class="col-md-12 col-ms-12">
+              <table class="table m-0">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Tổ chức</th>
+                    <th>Vai trò</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let x of dataRoles; let i = index; trackBy:trackByFn">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{getOrgName(x.organizationId)}}</td>
+                    <td>{{getRoleName(x.roleId)}}</td>
+                    <td><button (click)="removeRole(x)" class="btn btn-primary">Xóa</button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-          <hr>
-
-        </div>
-        <div class="row" *ngIf="dataRoles.length>0">
-          <div class="col-md-12 col-ms-12">
-            <table class="table m-0">
-              <thead>
-                <tr>
-                  <th>STT</th>
-                  <th>Tổ chức</th>
-                  <th>Vai trò</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let x of dataRoles; let i = index; trackBy:trackByFn">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{getOrgName(x.organizationId)}}</td>
-                  <td>{{getRoleName(x.roleId)}}</td>
-                  <td><button (click)="removeRole(x)" class="btn btn-primary">Xóa</button></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="row">
+            <div class="col-md-12">
+              <button (click)="updateUser()" type="button" style="width: 100px" class="btn btn-default waves-effect waves-light">Lưu</button>
+              <button (click)="redirect(users)" style="width: 100px" class="btn btn-danger waves-effect waves-light m-l-10">Hủy</button>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <button (click)="updateUser()" type="button" class="btn btn-default waves-effect waves-light">Lưu</button>
-            <button (click)="redirect(users)" class="btn btn-danger waves-effect waves-light m-l-10">Hủy</button>
-          </div>
-        </div>
-      </form>
+        </form>
 
+      </div>
     </div>
   </div>
 </div>

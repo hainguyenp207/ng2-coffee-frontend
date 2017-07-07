@@ -149,7 +149,11 @@ export class ActivityComponent implements OnInit {
     activity.confirmed = confirm;
     this.activityService.updateNoFile(activity).subscribe(
       data => {
-        this.handleSuccess(data);
+        if (confirm)
+          this.addToast(`Bạn đã phê duyệt hoạt động ${activity.name} thành công`, 10000, "success");
+        else {
+          this.addToast(`Bạn đã hủy phê duyệt hoạt động ${activity.name} thành công`, 10000, "success");
+        }
       },
       error => {
         this.handleError(error);
@@ -187,7 +191,8 @@ export class ActivityComponent implements OnInit {
   delete(idActivity: string) {
     this.activityService.delete(idActivity).subscribe(
       data => {
-        this.handleSuccess(data);
+
+        this.addToast("Hoạt động đã được xóa thành công", 2000, "success");
       },
       error => {
         this.handleError(error);
@@ -196,7 +201,7 @@ export class ActivityComponent implements OnInit {
 
   }
   getRouter() {
-    return this.isFullPermission() ? ['admin/activities/new'] : ['cbd/activities/new']
+    this.isFullPermission() ? ['admin/activities/new'] : ['cbd/activities/new']
   }
   handleSuccess(data: any) {
     if (data.status === 204) {
@@ -227,7 +232,7 @@ export class ActivityComponent implements OnInit {
             this.addToast(js.message, 3000, "error");
           }
         } catch (e) {
-          this.addToast(e, 3000, "error");
+          this.addToast("Có lỗi trong quá trình xử lý, vui lòng thử lại sau", 3000, "error");
         }
       }
     }
@@ -236,5 +241,30 @@ export class ActivityComponent implements OnInit {
     this.paging.currentPage = page - 1;
     this.fetchActivities(page - 1, this.paging.perPage)
   }
+  onChangeSearch(e) {
+    setTimeout(() => {
+      this.search(e.target.value, this.paging.currentPage, this.paging.perPage);
+    }, 2000)
+  }
+  search(keyword: string, page: Number, size: Number) {
+    if (!this.currentPermission.organization.id) {
+      this.activityService.searchActivitiesInternal(keyword, page, size).subscribe(
+        data => {
+          this.activities = data.json();
+        },
+        error => {
 
+        })
+    }
+    else {
+      this.activityService.searchActivitiesByOrgInternal(this.currentPermission.organization.id, keyword, page, size).subscribe(
+        data => {
+          this.activities = data.json();
+        },
+        error => {
+
+        })
+    }
+
+  }
 }

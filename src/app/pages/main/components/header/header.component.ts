@@ -30,12 +30,10 @@ export class HeaderComponent implements OnInit {
   fetchOrg() {
     this.orgService.getAll().subscribe(
       data => {
-        console.log(this.orgs);
         this.orgs = data.json();
       },
       error => {
         let dataJs = error.json();
-        console.log(dataJs);
       });
   }
   getLinkLogin() {

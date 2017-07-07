@@ -15,7 +15,10 @@ export class PointManagementComponent implements OnInit {
 
   registers: Array<Register> = [];
   data: any = {};
-  point: any = {};
+  point: any = {
+    social: 0,
+    tranning: 0
+  };
   constructor(
     private orgService: OrganizationService,
     private registerService: RegisterService,
@@ -36,8 +39,11 @@ export class PointManagementComponent implements OnInit {
   }
   fetchRegisterByUser(userId: string) {
     this.registerService.getRegisterByUser(userId).subscribe(data => {
-      console.log(data);
       this.registers = data.json();
+      this.registers.forEach((register) => {
+        this.point.social += register.pointSocial;
+        this.point.tranning += register.pointTranning;
+      })
     },
       error => {
         let dataJs = error.json();

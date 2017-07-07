@@ -8,7 +8,7 @@
           <div role="application" class="clearfix" id="steps-uid-0">
             <div class="content clearfix">
               <h2 id="steps-uid-0-h-0" style="margin-bottom: 30px;" class="title current">
-                <i class="fa fa-pencil" aria-hidden="true"></i> Hoạt động
+                <i class="fa fa-pencil" aria-hidden="true"></i> {{typeComponent=="new"?"Tạo hoạt động":"Sửa hoạt động"}}
               </h2>
               <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false">
                 <form role="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
@@ -78,8 +78,9 @@
           <label class="control-label">Đường dẫn</label>
           <input type="file" class="filestyle" #file (change)="onImgChange(file) " data-iconname="fa fa-cloud-upload" id="filestyle-6"
             tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
-          <div class="bootstrap-filestyle input-group"><input type="text" class="form-control " placeholder="" disabled=""> <span class="group-span-filestyle input-group-btn"
-              tabindex="0">
+          <div class="bootstrap-filestyle input-group">
+            <input type="text" class="form-control">
+            <span class="group-span-filestyle input-group-btn" tabindex="0">
           <label for="filestyle-6" class="btn btn-default ">
             <span class="icon-span-filestyle fa fa-cloud-upload"></span>
             <span class="buttonText">Chọn file</span></label>
@@ -89,8 +90,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <img #img id="img" width="300" height="300" src="{{imgSrc}}" alt="Avatar" [hidden]="imgSrc?false:true" />
+      <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center">
+        <img #img id="img" style="width: 80%" src="{{imgSrc}}" alt="Avatar" [hidden]="imgSrc?false:true" />
       </div>
     </div>
     <div class="row" style="padding-top:20px">

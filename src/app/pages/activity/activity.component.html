@@ -4,7 +4,7 @@
     <div class="col-sm-6">
       <form role="form">
         <div class="form-group contact-search m-b-30">
-          <input type="text" id="search" class="form-control" placeholder="Tim kiếm...">
+          <input type="text" (input)="onChangeSearch($event)" id="search" class="form-control" placeholder="Tim kiếm...">
           <button type="submit" class="btn btn-white"><i class="fa fa-search"></i></button>
         </div>
         <!-- form-group -->
@@ -58,13 +58,13 @@
             <p class="text-dark m-b-5"><b>Ngày kết thúc: </b> <span class="text-muted">{{activity.endDate}}</span></p>
           </div>
           <div class="table-detail lable-detail">
-            <span class="label label-danger">{{activity.confirmed?"Đã duyệt":"Chờ duyệt"}}</span>
+            <span class="label label-danger">{{activity.confirmed?"Đã phê duyệt":"Chờ phê duyệt"}}</span>
             <span class="label label-info">{{activity.status}}</span>
           </div>
           <div class="table-detail">
 
             <ng-template [ngIf]="isFullPermission()">
-              <a (click)="confirm(activity,activity.confirmed?false:true)" class="btn btn-sm waves-effect waves-light" [ngClass]="activity.confirmed?'btn-info':'btn-danger'">{{activity.confirmed?"Hủy duyệt":"Duyệt"}} </a>
+              <a (click)="confirm(activity,activity.confirmed?false:true)" class="btn btn-sm waves-effect waves-light" [ngClass]="activity.confirmed?'btn-info':'btn-danger'">{{activity.confirmed?"Hủy phê duyệt":"Phê duyệt"}} </a>
             </ng-template>
             <ng-template [ngIf]="isFullPermission() || (isRoleOrg() && canEditActivity(activity.confirmed))">
               <a [routerLink]='getLinkEdit(activity.id)' class="btn btn-sm btn-danger">Sửa</a>

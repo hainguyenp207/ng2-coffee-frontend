@@ -39,7 +39,10 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
   editor;
   authentication: any
   organizations: any = [];
-  data: any = {};
+  data: any = {
+    pointSocial: 0,
+    pointTranning: 0
+  };
   hasFieldError: boolean = false;
   isSubmited: boolean = false;
   listFieldError: any = [];

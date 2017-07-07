@@ -100,6 +100,12 @@ export class ActivityService {
     searchActivitiesByOrg(keyword: string, orgId: string, page: Number, size: Number) {
         return this.http.get(this.backendAPI + `public/search?q=${keyword}&organization_id=${orgId}&page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
     }
+    searchActivitiesInternal(keyword: string, page: Number, size: Number) {
+        return this.http.get(this.backendAPI + `search?q=${keyword}&page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
+    searchActivitiesByOrgInternal(keyword: string, orgId: string, page: Number, size: Number) {
+        return this.http.get(this.backendAPI + `search?q=${keyword}&organization_id=${orgId}&page=${page}&size=${size}`, this.jwt()).map((response: Response) => response);
+    }
     // private helper methods
 
     private jwt() {

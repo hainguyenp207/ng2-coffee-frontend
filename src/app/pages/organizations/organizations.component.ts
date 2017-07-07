@@ -43,14 +43,14 @@ export class OrganizationsComponent implements OnInit {
         let dataJs = error.json();
         switch (error.status) {
           case 401: {
-            this.addToast("Bạn chưa đăng nhập, vui long dang nhap lai", 2000, "error");
+            this.addToast("Bạn chưa đăng nhập, vui long dang nhap lai", 10000, "error");
             setTimeout(() => {
               this.router.navigateByUrl("/login");
             }, 3000);
           } break;
           default:
             {
-              this.addToast(dataJs.message, 2000, "error");
+              this.addToast(dataJs.message, 10000, "error");
             }
         }
       });
@@ -108,8 +108,8 @@ export class OrganizationsComponent implements OnInit {
   createOrg() {
     this.orgService.create(this.org).subscribe(
       data => {
-        this.addToast("Tổ chức đã được tạo thành công", 2000, "success");
-        this.hideModal();
+        this.addToast("Tổ chức đã được tạo thành công", 10000, "success");
+        //this.hideModal();
         this.fetchOrg();
       },
       error => {
@@ -122,15 +122,15 @@ export class OrganizationsComponent implements OnInit {
           }
         } else
           if (dataJs.message) {
-            this.addToast(dataJs.message, 2000, "success");
+            this.addToast(dataJs.message, 10000, "error");
           }
       });
   }
   updateOrg() {
     this.orgService.update(this.org).subscribe(
       data => {
-        this.addToast("Thông tin tổ chức đã được cập nhập thành công", 2000, "success");
-        this.hideModal();
+        this.addToast("Thông tin tổ chức đã được cập nhập thành công", 10000, "success");
+        //this.hideModal();
         this.fetchOrg();
       },
       error => {
