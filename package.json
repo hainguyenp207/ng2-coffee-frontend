@@ -9,7 +9,8 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "preinstall": "npm install -g http-server"
+    "preinstall": "npm install -g http-server",
+    "postinstall": "ng server --app dashboard"
   },
   "engines": {
     "node": "8.1.4"
