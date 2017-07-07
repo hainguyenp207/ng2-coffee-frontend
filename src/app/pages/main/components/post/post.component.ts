@@ -90,6 +90,7 @@ export class PostComponent implements OnInit {
 
           } break;
           case 404: {
+            this.router.navigateByUrl("/")
           }
         }
       });

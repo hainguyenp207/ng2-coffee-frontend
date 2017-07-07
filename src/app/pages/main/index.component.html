@@ -1,10 +1,33 @@
 <div class="clear"></div>
-<div class="container">
-    <div class="row">
+<div class="container" style="background: #fff">
+    <div class="slide" style="padding: 10px 0; text-align: center">
+        <carousel [interval]="2000">
+            <slide>
+                <img src="assets/images/mhx.jpg" halt="First slide" height="">
+            </slide>
+            <slide>
+                <img src="assets/images/quoc-te-thieu-nhi.png" alt="Second slide">
+            </slide>
+            <slide>
+                <img src="assets/images/xe-dap-tour.png" alt="Third slide">
+            </slide>
+            <slide>
+                <img src="assets/images/chao-don-tsv.png" alt="Third slide">
+            </slide>
+        </carousel>
+    </div>
+
+    <div class="row" style="padding-top: 20px">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <h1 *ngIf="activities.length<=0" style="text-align: center; font-weight: bold; font-size: 38pt">
                 Chưa hoạt động nào được đăng tải
             </h1>
+            <h2 style="border-bottom: 2px solid #0e76bc; margin-left: 10px">
+                <a class="title-category">
+ Hoạt động
+            </a>
+
+            </h2>
             <div *ngFor="let activity of activities | paginate: { id: 'server', itemsPerPage:
                 paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total }">
                 <main-activity [data]="activity"></main-activity>
@@ -12,11 +35,11 @@
 
         </div>
     </div>
-    <div class="row " style="padding-top: 20px ">
+    <div class="row" style="padding-top: 20px ">
         <div class="col-lg-12 col-md-12 ">
             <div style="text-align: center ">
                 <div class="spinner" [ngClass]="{ 'hidden': !loading } "></div>
-                <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
+                <pagination-controls class="pagination" previousLabel="Trước" nextLabel="Sau" (pageChange)="getPage($event)" id="server"></pagination-controls>
             </div>
         </div>
     </div>

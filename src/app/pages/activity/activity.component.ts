@@ -200,7 +200,7 @@ export class ActivityComponent implements OnInit {
   }
   handleSuccess(data: any) {
     if (data.status === 204) {
-      this.addToast("Hoat dong da duoc xoa thanh cong", 2000, "success");
+      this.addToast("Hoạt động đã được xóa thành công", 2000, "success");
     } else {
       var json = data.json();
       if (json.code == 0) {

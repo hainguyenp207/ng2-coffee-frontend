@@ -1,0 +1,15 @@
+.slide img{
+    min-width: 100%;
+    height: 300px;
+    -webkit-filter: grayscale(10%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(10%);
+}
+.title-category{
+    color: #fff; 
+    background-color: #0e76bc; 
+    padding:2px 15px;
+    border-radius: 2%; 
+}
+.title-category:hover{
+    text-decoration: none
+}

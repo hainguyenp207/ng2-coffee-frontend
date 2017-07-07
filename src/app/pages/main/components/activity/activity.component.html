@@ -5,7 +5,7 @@
             <a href="#/activities/post/{{data.id}}">
                <div class="large_thumb thumb_hover">
                   <div class="img_wrapper">
-                     <img class="thumb" src="{{getLinkImg(data.imgUrl)}}">
+                     <img class="thumb" style="border-radius:2%; width: 300px !important; height: 200px !important" src="{{getLinkImg(data.imgUrl)}}">
                   </div>
                </div>
             </a>
@@ -21,12 +21,6 @@
       <span class="time">
                   {{data.createdDate}}
                </span>
-    </div>
-    <div class="post_item_inner">
-      <p>
-        {{data.desc}}
-      </p>
-      <div class="clear"></div>
     </div>
     </span>
   </div>

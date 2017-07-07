@@ -43,6 +43,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { PageForbiddenComponent } from './pages/page-forbidden/page-forbidden.component';
 import { PageInternalErrorComponent } from './pages/page-internal-error/page-internal-error.component';
 import { SharedData } from './shared-data'
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { SharedData } from './shared-data'
     LoadingAnimateModule.forRoot(),
     NgxPaginationModule,
     BrowserAnimationsModule,
+    CarouselModule.forRoot()
 
   ],
   providers: [

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Activity, Organization } from "app/_models/index";
 import { ActivityService, OrganizationService } from 'app/_services/index';
-
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'main-header',
   templateUrl: './header.component.html',
@@ -16,7 +16,9 @@ export class HeaderComponent implements OnInit {
   private userName: any = '';
   private orgs: Array<Organization> = new Array;
   constructor(
-    private orgService: OrganizationService
+    private orgService: OrganizationService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.fetchOrg();
   }
@@ -37,7 +39,12 @@ export class HeaderComponent implements OnInit {
       });
   }
   getLinkLogin() {
-    return this.url + "?return_url=" + this.returnUrl;
+    if (this.accessToken) {
+      this.router.navigateByUrl("/")
+      localStorage.clear()
+    }
+    else
+      return this.url + "?return_url=" + this.returnUrl;
   }
   onSearchChange(e: any) {
     setTimeout(() => {
