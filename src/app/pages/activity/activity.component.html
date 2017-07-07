@@ -11,7 +11,7 @@
       </form>
     </div>
     <div class="col-md-6" *ngIf="!isStudent()">
-      <a [routerLink]="getRouter()" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" data-animation="fadein"
+      <a [routerLink]="['new']" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" data-animation="fadein"
         data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a">
                                 <i class="md md-add"></i> Thêm mới</a>
       <div class="h5 m-0" *ngIf="!isStudent()">
@@ -77,13 +77,13 @@
       </div>
     </div>
   </div>
-  <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
+ 
   <div class="row" style="padding-top: 20px">
     <div class="col-lg-12 col-md-12">
       <div style="text-align: center">
         <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
         <!--<pagination-controls class="pagination" (pageChange)="getPage($event)" id="server"></pagination-controls>-->
-
+ <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
       </div>
     </div>
   </div>

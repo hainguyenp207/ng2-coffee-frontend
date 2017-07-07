@@ -195,8 +195,8 @@ export class ActivityComponent implements OnInit {
   delete(idActivity: string) {
     this.activityService.delete(idActivity).subscribe(
       data => {
-
         this.addToast("Hoạt động đã được xóa thành công", 2000, "success");
+        this.fetchActivities(0, 10);
       },
       error => {
         this.handleError(error);

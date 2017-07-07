@@ -70,12 +70,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
 
   ) {
     this.toastyConfig.theme = 'material';
-
-  }
-
-  ngOnInit() {
-    this.active = JSON.parse(localStorage.getItem("active"));
-    this.router.events.subscribe((val) => {
+ this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd) {
         if (val.url.includes("/activities/edit")) {
@@ -90,6 +85,11 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
         }
       }
     });
+  }
+
+  ngOnInit() {
+    this.active = JSON.parse(localStorage.getItem("active"));
+   
     // this.organizationService.getAll().subscribe(
     //   data => {
     //     this.organizations = data;
@@ -292,7 +292,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
 
   submitActivity() {
     let organizationId = localStorage.getItem("active");
-
+    console.log(organizationId)
     if (!this.daterange.start) {
       this.daterange.start = moment();
     }
@@ -319,6 +319,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     formData.append('data', new Blob([JSON.stringify(activity)], {
       type: "application/json"
     }));
+     console.log("Edit")
     let inputs = ["name"];
     this.hasFieldError = false;
     this.listFieldError = [];
@@ -331,10 +332,14 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
     if (!this.hasFieldError) {
       this.isSubmited = true;
       if (this.typeComponent == "edit") {
+      console.log("Edit")
         this.updateActivity(formData, this.id);
       } else if (this.typeComponent == "new") {
+        console.log("NEw")
+        
         this.createActivity(formData);
       }
+
     }
   }
   getLinkImg(fileName: string) {

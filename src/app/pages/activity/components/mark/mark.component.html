@@ -69,7 +69,8 @@
                   <td>{{register.user.name}}</td>
                   <td>{{register.createdDate}}</td>
                   <td>
-                    <div class="checkbox checkbox-success"><input id="checkbox3" (change)="onChangeJoined($event, register.id,register.user.username)" type="checkbox"
+                    <div class="checkbox checkbox-success">
+                      <input id="checkbox3" style="height: 30px" (change)="onChangeJoined($event, register.id,register.user.username)" type="checkbox"
                         [checked]="register.joined" /> <label for="checkbox3"></label> </div>
                   </td>
                 </tr>
