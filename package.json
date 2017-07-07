@@ -4,13 +4,12 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "http-server",
+    "start": "ng server --app dashboard",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "preinstall": "npm install -g http-server",
-    "postinstall": "ng build && mv dist/* ."
+    "preinstall": "npm install -g http-server"
   },
   "engines": {
     "node": "8.1.4"
