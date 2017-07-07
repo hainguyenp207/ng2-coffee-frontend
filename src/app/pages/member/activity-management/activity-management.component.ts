@@ -84,7 +84,7 @@ export class ActivityManagementComponent implements OnInit {
   }
   getLinkImg(fileName: string) {
     if (fileName)
-      return "http://https://backend-social.herokuapp.com/files/" + fileName;
-    return "http://https://backend-social.herokuapp.com/files/hcmute.png";
+      return "https://backend-social.herokuapp.com/files/" + fileName;
+    return "https://backend-social.herokuapp.com/files/hcmute.png";
   }
 }
