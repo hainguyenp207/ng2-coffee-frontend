@@ -12,6 +12,9 @@
     "preinstall": "npm install -g http-server && npm install -g angular-cli",
     "postinstall": "ng build && mv dist/* ."
   },
+  "engines": {
+    "node": "8.1.4"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.1.3",
