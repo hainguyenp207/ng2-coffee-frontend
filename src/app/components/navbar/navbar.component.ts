@@ -12,7 +12,11 @@ export class NavbarComponent implements OnInit {
 
   permissions = [];
   @Input()
-  currentPermission: any = {}
+  currentPermission: any = {
+    role: {
+      id: null
+    }
+  }
   constructor(private router: Router, private route: ActivatedRoute) {
 
   }

@@ -243,7 +243,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
       data => {
         let dataJS = data.json();
         if (data.status === 200) {
-          this.addToast("Hoạt động đã được cập nhập", 2000, "success");
+          this.addToast("Hoạt động đã được cập nhập", 5000, "success");
           this.fetchActivity(id);
         } else
           if (dataJS.code != 0) {

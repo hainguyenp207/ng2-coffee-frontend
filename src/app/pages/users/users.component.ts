@@ -22,6 +22,12 @@ export class UsersComponent implements OnInit {
   dataRoles: any = [];
   permissions = [];
   currentPermission: any = {};
+  i: Number = 0;
+  paging: any = {
+    currentPage: 0,
+    total: 0,
+    perPage: 10
+  }
   constructor(
     private userService: UserService,
     private orgService: OrganizationService,
@@ -43,6 +49,49 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  countUser() {
+    if (this.isFullPermission()) {
+      this.userService.countUser().subscribe(
+        data => {
+          this.paging.total = data.json();
+        },
+        error => {
+          this.handleError(error);
+        });
+    } else {
+      this.userService.countUserOrg(this.currentPermission.organization.id).subscribe(
+        data => {
+          this.paging.total = data.json();
+        },
+        error => {
+          this.handleError(error);
+        });
+    }
+
+  }
+  handleError(error: any) {
+    switch (error.status) {
+      case 401: this.router.navigateByUrl("/login"); break;
+      case 403: this.router.navigateByUrl("/error/403"); break;
+      case 404: this.router.navigateByUrl("/error/404"); break;
+      case 400: {
+        let errorSV = error.json();
+        errorSV.detail.forEach(element => {
+          this.addToast(element.message, 5000, "error");
+        });
+      }; break;
+      default: {
+        try {
+          let js = error.json();
+          if (js.code) {
+            this.addToast(js.message, 3000, "error");
+          }
+        } catch (e) {
+          this.addToast("Có lỗi trong quá trình xử lý, vui lòng thử lại sau", 3000, "error");
+        }
+      }
+    }
+  }
   ngOnInit() {
     this.userService.getAll().subscribe(
       data => {
@@ -62,25 +111,8 @@ export class UsersComponent implements OnInit {
         //   }, 3000);
         // }
       });
-    this.orgService.getAll().subscribe(
-      data => {
-        this.orgs = data;
-        console.log("Org", data);
-      },
-      error => {
-        let errorSV = error.json();
-        if (errorSV) {
-          if (errorSV.code) {
-            let message = errorSV.message;
-            this.addToast(message, 4000, "error");
-          }
-        }
-        // if (error.status == 401) {
-        //   setTimeout(() => {
-        //     this.router.navigateByUrl("/login");
-        //   }, 3000);
-        // }
-      });
+    this.countUser();
+    this.fetchUser(0, 10);
     this.roleService.getAll().subscribe(
       data => {
         this.roles = data.json();
@@ -100,7 +132,71 @@ export class UsersComponent implements OnInit {
         }
       });
   }
-
+  fetchUser(page: Number, perPage: Number) {
+    if (this.isFullPermission()) {
+      this.userService.getAll().subscribe(
+        data => {
+          this.users = data.json();
+        },
+        error => {
+          let errorSV = error.json();
+          if (errorSV) {
+            if (errorSV.code) {
+              let message = errorSV.message;
+              this.addToast(message, 4000, "error");
+            }
+          }
+          // if (error.status == 401) {
+          //   setTimeout(() => {
+          //     this.router.navigateByUrl("/login");
+          //   }, 3000);
+          // }
+        });
+    } else {
+      this.userService.getUserByOrg(this.currentPermission.organization.id).subscribe(
+        data => {
+          this.users = data.json();
+        },
+        error => {
+          let errorSV = error.json();
+          if (errorSV) {
+            if (errorSV.code) {
+              let message = errorSV.message;
+              this.addToast(message, 4000, "error");
+            }
+          }
+          // if (error.status == 401) {
+          //   setTimeout(() => {
+          //     this.router.navigateByUrl("/login");
+          //   }, 3000);
+          // }
+        });
+    }
+  }
+  fetchUserOrg(orgId: string, page: Number, perPage: Number) {
+    this.userService.getAll().subscribe(
+      data => {
+        this.users = data;
+      },
+      error => {
+        let errorSV = error.json();
+        if (errorSV) {
+          if (errorSV.code) {
+            let message = errorSV.message;
+            this.addToast(message, 4000, "error");
+          }
+        }
+        // if (error.status == 401) {
+        //   setTimeout(() => {
+        //     this.router.navigateByUrl("/login");
+        //   }, 3000);
+        // }
+      });
+  }
+  getPage(page: number) {
+    this.paging.currentPage = page - 1;
+    this.fetchUser(page - 1, this.paging.perPage)
+  }
   addToast(message, timeOut, type) {
     // Or create the instance of ToastOptions
     var toastOptions: ToastOptions = {

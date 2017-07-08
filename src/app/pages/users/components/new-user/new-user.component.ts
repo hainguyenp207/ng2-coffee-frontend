@@ -19,6 +19,8 @@ export class NewUserComponent implements OnInit, OnChanges {
   rolesUser: any = [];
   dataRole: any = {};
   dataRoles: any = [];
+  permissions = [];
+  currentPermission: any = {};
   constructor(
     private userService: UserService,
     private orgService: OrganizationService,
@@ -27,7 +29,18 @@ export class NewUserComponent implements OnInit, OnChanges {
     private toastyConfig: ToastyConfig,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+    let data = localStorage.getItem("data");
+    let permission = localStorage.getItem("active");
+    if (data) {
+      let dataJs = JSON.parse(data);
+      let permissionJs = JSON.parse(permission);
+      this.permissions = dataJs.permissions;
+      this.currentPermission = permissionJs;
+    } else {
+      this.router.navigateByUrl("/login");
+    }
+  }
 
   ngOnInit() {
     this.userService.getAll().subscribe(
@@ -50,7 +63,17 @@ export class NewUserComponent implements OnInit, OnChanges {
       });
     this.orgService.getAll().subscribe(
       data => {
-        this.orgs = data.json();
+        if (this.isFullPermission())
+          this.orgs = data.json();
+        else
+          this.orgs = [
+
+            {
+              id: this.currentPermission.organization.id,
+              name: this.currentPermission.organization.name
+            }
+
+          ]
       },
       error => {
         let errorSV = error.json();
@@ -116,12 +139,12 @@ export class NewUserComponent implements OnInit, OnChanges {
     this.userService.create(data).subscribe(
       data => {
         if (data.status == 201) {
-          this.addToast("Tài khoản đã được tạo thành cồng", 3000, "success")
+          this.addToast("Tài khoản đã được tạo thành công", 3000, "success")
         }
       },
       error => {
         if (error.status == 401) {
-          console.log("Chua dang nhap");
+          this.addToast("Phiên làm việc hết hạn, vui lòng đăng nhập lại", 4000, "error");
         }
         if (error.status == 409) {
           let errorJs = error.json();
@@ -166,11 +189,9 @@ export class NewUserComponent implements OnInit, OnChanges {
     return role[0].name;
   }
   getOrgName(orgId: string) {
-    console.log(orgId)
     let orgSelected = this.orgs.filter(org => {
       return org.id === orgId;
     });
-    console.log(orgSelected)
     return orgSelected[0].name;
   }
   trackByFn(index, item) {
@@ -181,5 +202,18 @@ export class NewUserComponent implements OnInit, OnChanges {
   }
   redirect(pagename: string) {
     this.router.navigate(['/' + pagename]);
+  }
+  isFullPermission() {
+    if (this.currentPermission.role.id === 'ADMIN'
+      && this.currentPermission.organization.id === 'HCMUTE') {
+      return true;
+    } else
+      return false;
+  }
+  isRoleOrg() {
+    if (this.currentPermission.role.id === 'CBD') {
+      return true;
+    } else
+      return false;
   }
 }

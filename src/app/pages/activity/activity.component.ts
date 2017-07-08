@@ -13,7 +13,11 @@ import { Activity } from "app/_models/index";
 export class ActivityComponent implements OnInit {
   activities: any = [];
   permissions = [];
-  currentPermission: any = {};
+  currentPermission: any = {
+    role: {
+      id: null
+    }
+  }
   currentActivity: any = {};
   countActivities: number = 0;
   count: number = 0;
@@ -216,15 +220,15 @@ export class ActivityComponent implements OnInit {
   }
   handleError(error: any) {
     switch (error.status) {
-      case 401: this.router.navigateByUrl("/login");
-      case 403: this.router.navigateByUrl("/error/403");
-      case 404: this.router.navigateByUrl("/error/404");
+      case 401: this.router.navigateByUrl("/login"); break;
+      case 403: this.router.navigateByUrl("/error/403"); break;
+      case 404: this.router.navigateByUrl("/error/404"); break;
       case 400: {
         let errorSV = error.json();
         errorSV.detail.forEach(element => {
           this.addToast(element.message, 5000, "error");
         });
-      };
+      }; break;
       default: {
         try {
           let js = error.json();

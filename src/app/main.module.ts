@@ -8,7 +8,6 @@ import { routing } from './main.routing';
 import { MainComponent } from './main.component';
 
 import { AlertComponent, } from './components/alert/alert.component';
-import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './pages/main/components/header/header.component';
 import { FooterComponent } from './pages/main/components/footer/footer.component';
 import { IndexComponent } from './pages/main/index.component';
@@ -44,6 +43,7 @@ import { PageForbiddenComponent } from './pages/page-forbidden/page-forbidden.co
 import { PageInternalErrorComponent } from './pages/page-internal-error/page-internal-error.component';
 import { SharedData } from './shared-data'
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { LoginComponent } from './pages/main/components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     FooterComponent,
     IndexComponent,
     ActivityComponent,
-    PostComponent
+    PostComponent,
+    LoginComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     ActivityService,
     RegisterService,
     LoadingAnimateService,
-    SharedData
+    SharedData,
+    AlertService
 
   ],
   bootstrap: [MainComponent]

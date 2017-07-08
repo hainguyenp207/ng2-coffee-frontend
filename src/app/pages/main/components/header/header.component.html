@@ -30,7 +30,7 @@
                     </li>
                   </ul>
                 </li>
-                <li><a href="{{getLinkLogin()}}">{{!accessToken?"ĐĂNG NHẬP":userName}}</a></li>
+                <li><a [routerLink]="getLinkLogin()">{{!accessToken?"ĐĂNG NHẬP":userName}}</a></li>
               </ul>
               <div class="search-bar">
                 <div class="nav-search">

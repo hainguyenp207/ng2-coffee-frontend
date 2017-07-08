@@ -12,33 +12,51 @@
                                        Nhập từ file</a>
     </div>-->
   </div>
-  <div class="row" style="padding-bottom: 20px">
-    <div class="col-lg-12">
-      <table datatable id="usersDataTable" class="table table-striped table-bordered dataTable" role="grid" aria-describedby="usersDataTable_info">
-        <thead>
-          <tr role="row">
-            <th>STT</th>
-            <th>Tên tài khoản </th>
-            <th>Họ và tên</th>
-            <th>Giới tính</th>
-            <th>Email</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users; let i = index">
-            <td>{{i+1}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.sex?"Nam":"Nữ"}}</td>
-            <td>{{user.email}}</td>
-            <td>
-              <a [routerLink]="['/pages/cbd/users/edit/',(user.username)]" class="btn btn-default user">Sửa</a>
-              <!--<button data-toggle="custom-modal" data-target="#custom-modal" class="btn btn-danger del">Xóa</button>-->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+  <div id="usersDataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div class="row" style="padding: 10px 0">
+      <div class="col-sm-6">
+        <div class="dataTables_length" id="usersDataTable_length">
+          <label>Xem 
+                <select [(ngModel)]="paging.perPage" name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  </select>
+                   mục</label></div>
+      </div>
+    </div>
+    <table datatable id="usersDataTable" class="table table-striped table-bordered dataTable" role="grid" aria-describedby="usersDataTable_info">
+      <thead>
+        <tr role="row">
+          <th>Tên tài khoản </th>
+          <th>Họ và tên</th>
+          <th>Giới tính</th>
+          <th>Email</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users | paginate: { id: 'server', itemsPerPage: paging.perPage, currentPage: paging.currentPage+1, totalItems: paging.total }">
+          <td>{{user.username}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.sex?"Nam":"Nữ"}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <a [routerLink]="['/pages/cbd/users/edit/',(user.username)]" class="btn btn-default user">Sửa</a>
+            <!--<button data-toggle="custom-modal" data-target="#custom-modal" class="btn btn-danger del">Xóa</button>-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" style="padding-top: 20px">
+    <div class="col-lg-12 col-md-12">
+      <div style="text-align: center">
+        <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+        <pagination-controls class="pagination" previousLabel="Trước" nextLabel="Sau" (pageChange)="getPage($event)" id="server"></pagination-controls>
+      </div>
     </div>
   </div>
 </div>

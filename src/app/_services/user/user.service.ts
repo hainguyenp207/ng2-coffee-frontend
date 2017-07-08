@@ -22,7 +22,9 @@ export class UserService {
     getAll() {
         return this.http.get(this.backendAPI, this.jwt()).map((response: Response) => response);
     }
-
+    getUserByOrg(orgId: string) {
+        return this.http.get(this.backendAPI + "?organization_id=" + orgId, this.jwt()).map((response: Response) => response);
+    }
     getById(id: string) {
         return this.http.get(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
@@ -38,7 +40,12 @@ export class UserService {
     delete(id: string) {
         return this.http.delete(this.backendAPI + id, this.jwt()).map((response: Response) => response);
     }
-
+    countUser() {
+        return this.http.get(this.backendAPI + "count", this.jwt()).map((response: Response) => response);
+    }
+    countUserOrg(orgId: string) {
+        return this.http.get(`${this.backendAPI}count?organization_id=${orgId}`, this.jwt()).map((response: Response) => response);
+    }
     // private helper methods
 
     private jwt() {

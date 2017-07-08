@@ -7,7 +7,11 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 })
 export class PagesComponent implements OnInit {
   permissions = [];
-  currentPermission: any = {}
+  currentPermission: any = {
+    role: {
+      id: null
+    }
+  }
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -19,7 +23,8 @@ export class PagesComponent implements OnInit {
       this.permissions = dataJs.permissions;
       this.currentPermission = permissionJs;
     } else {
-      this.router.navigateByUrl("/login")
+      this.router.navigateByUrl("/login");
+      return;
       //window.location.href = "/login";
     }
   }

@@ -48,7 +48,7 @@ export class ActivityManagementComponent implements OnInit {
         let dataJs = error.json();
         switch (error.status) {
           case 401: {
-            this.addToast("Bạn chưa đăng nhập, vui long dang nhap lai", 2000, "error");
+            this.addToast("Bạn chưa đăng nhập, vui lòng đăng nhập lại", 2000, "error");
             setTimeout(() => {
               this.router.navigateByUrl("/login");
             }, 3000);

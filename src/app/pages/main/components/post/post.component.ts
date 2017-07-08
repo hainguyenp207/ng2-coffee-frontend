@@ -44,32 +44,27 @@ export class PostComponent implements OnInit {
       xfbml: true,
       version: 'v2.9'
     };
-    //  <div id="fb-root"></div>
-    // <script>
-    //     (function (d, s, id) {
-    //         var js, fjs = d.getElementsByTagName(s)[0];
-    //         if (d.getElementById(id)) return;
-    //         js = d.createElement(s); js.id = id;
-    //         js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=1378033548944571";
-    //         fjs.parentNode.insertBefore(js, fjs);
-    //     }(document, 'script', 'facebook-jssdk'));
-    // </script>
     fb.init(initParams);
     this.toastyConfig.theme = 'material';
-    this.idUser = localStorage.getItem("userId");
-    this.token = localStorage.getItem("token");
-    this.router.events.subscribe((val) => {
-      // see also 
-      if (val instanceof NavigationEnd) {
-        this.sub = this.route.params.subscribe(params => {
-          this.id = params['id'];
-          this.fetchActivity(this.id);
-          if (this.idUser)
-            this.checkUserRegisteredActivity(this.id, this.idUser);
-        });
+    try {
+      let data = JSON.parse(localStorage.getItem("data"));
+      this.idUser = data.username;
+      this.token = localStorage.getItem("token");
+      this.router.events.subscribe((val) => {
+        // see also 
+        if (val instanceof NavigationEnd) {
+          this.sub = this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.fetchActivity(this.id);
+            if (this.idUser)
+              this.checkUserRegisteredActivity(this.id, this.idUser);
+          });
+        }
+      });
+    } catch (e) {
 
-      }
-    });
+    }
+
   }
 
   ngOnInit() {

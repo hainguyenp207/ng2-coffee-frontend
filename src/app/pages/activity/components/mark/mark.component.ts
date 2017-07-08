@@ -108,7 +108,7 @@ export class MarkComponent implements OnInit {
     console.log(reg)
     this.registerService.update(reg).subscribe(
       data => {
-        this.addToast("Cập nhập thành công", 2000, "success");
+        this.addToast("Cập nhập thành công", 10000, "success");
       },
       error => {
         switch (error.status) {

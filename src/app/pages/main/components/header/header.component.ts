@@ -21,11 +21,24 @@ export class HeaderComponent implements OnInit {
     private router: Router,
   ) {
     this.fetchOrg();
+    this.router.events.subscribe((val) => {
+      try {
+        let data = JSON.parse(localStorage.getItem("data"));
+        this.userName = data.name;
+      } catch (e) {
+        console.log(e);
+      }
+    });
   }
 
   ngOnInit() {
     this.accessToken = localStorage.getItem('token');
-    this.userName = localStorage.getItem('userName');
+    try {
+      let data = JSON.parse(localStorage.getItem("data"));
+      this.userName = data.name;
+    } catch (e) {
+    }
+
   }
   fetchOrg() {
     this.orgService.getAll().subscribe(
@@ -37,12 +50,7 @@ export class HeaderComponent implements OnInit {
       });
   }
   getLinkLogin() {
-    if (this.accessToken) {
-      this.router.navigateByUrl("/")
-      localStorage.clear()
-    }
-    else
-      return this.url + "?return_url=" + this.returnUrl;
+    return ['/login']
   }
   onSearchChange(e: any) {
     setTimeout(() => {
