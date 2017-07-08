@@ -105,7 +105,6 @@ export class MarkComponent implements OnInit {
     reg.pointTranning = this.activity.pointTranning;
     reg.activityId = this.id;
     reg.userId = userId;
-    console.log(reg)
     this.registerService.update(reg).subscribe(
       data => {
         this.addToast("Cập nhập thành công", 10000, "success");

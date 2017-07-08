@@ -51,6 +51,7 @@ import { IndexComponent } from './main/index/index.component';
 import { PostComponent } from './main/components/post/post.component';
 //import { PagesModule } from './pages.module';
 import { FacebookModule } from 'ngx-facebook';
+import { RegisterComponent } from './activity/components/register/register.component';
 
 
 
@@ -91,7 +92,8 @@ import { FacebookModule } from 'ngx-facebook';
         PointManagementComponent,
         ActivityManagementComponent,
         IndexComponent,
-        PostComponent
+        PostComponent,
+        RegisterComponent
     ]
 })
 export class PagesModule {

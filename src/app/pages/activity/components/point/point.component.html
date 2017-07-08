@@ -1,11 +1,12 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div class="card-box table-responsive">
-  <div class="row">
+  <div class="row" style="padding-top: 20px">
     <div class="col-lg-12">
       <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
         <div class="row" style="padding-bottom: 12px">
           <div class="col-sm-6">
             <div class="dataTables_length" id="usersDataTable_length"><label>Xem 
-              <select [(ngModel)]="paging.perPage" name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm">
+              <select (change)="onPageChange(paging.currentPage, $event.target.value)" name="usersDataTable_length" aria-controls="usersDataTable" class="form-control input-sm">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -34,7 +35,7 @@
                   <th class="sorting" tabindex="0" aria-controls="usersDataTable" rowspan="1" colspan="1" aria-label="Số lượng: activate to sort column ascending"
                     style="width: 140px;">Số lượng</th>
                   <th class="sorting" tabindex="0" aria-controls="usersDataTable" rowspan="1" colspan="1" aria-label="Chấm điểm: activate to sort column ascending"
-                    style="width: 171px;">Chấm điểm</th>
+                    style="width: 171px;">Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +45,10 @@
                   <td>{{activity.startDate}}</td>
                   <td>{{activity.endDate}}</td>
                   <td>{{activity.countRegistered}}</td>
-                  <td><a [routerLink]="['mark',(activity.id)]" class="btn btn-default user">Chi tiết</a> </td>
+                  <td>
+                    <a (click)="showModalEdit(activity)" class="btn btn-primary user">Đăng ký</a>
+                    <a [routerLink]="['mark',(activity.id)]" class="btn btn-success user">Điểm danh</a>
+                  </td>
                 </tr>
                 <tr *ngIf="isEmpty()">
                   <td colspan="5" style="text-align: center">
@@ -63,6 +67,47 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" bsModal #orgModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content" style="padding:0;border-color: none">
+      <h4 class="custom-modal-title">Đăng ký tham gia</h4>
+      <div class="custom-modal-text text-left">
+        <form role="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label class="col-md-2 col-sm-2 col-xs-2">Hoạt động</label>
+                <div class="input-group col-md-10 col-sm-10 col-xs-10">
+                  <span>{{currentActivity.name}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label for="name" class="col-md-2 col-sm-2 col-xs-2">MSSV</label>
+                <div class="input-group col-md-10 col-sm-10 col-xs-10">
+                  <input type="text" name="name" class="form-control" [ngClass]="{ 'parsley-error': f.submitted}" [(ngModel)]="dataRegister.userId"
+                    id="username" placeholder="Nhập MSSV">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="pull-right">
+                <button type="button" (click)="register()" class="btn btn-default waves-effect waves-light">Lưu</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light m-l-10" (click)="hideModal()">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivityService } from 'app/_services/index';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivityService, RegisterService } from 'app/_services/index';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-point',
@@ -22,9 +23,15 @@ export class PointComponent implements OnInit {
     currentPage: 0,
     total: 0,
     perPage: 10
-  }
+  };
+  dataRegister: any = {};
+
+
+  @ViewChild('orgModal') public orgModal: ModalDirective;
+
   constructor(private activityService: ActivityService,
     private route: ActivatedRoute,
+    private registerService: RegisterService,
     private router: Router,
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig) {
@@ -66,7 +73,7 @@ export class PointComponent implements OnInit {
       });
   }
   countActivityOrg(orgId: string) {
-    this.activityService.countActivityOrg(orgId).subscribe(
+    this.activityService.countActivityOrgPublic(orgId).subscribe(
       data => {
         this.paging.total = data.json();
       },
@@ -117,17 +124,63 @@ export class PointComponent implements OnInit {
     }
   }
   getPage(page: number) {
-    console.log(page);
     this.paging.currentPage = page - 1;
     this.fetchActivities(page - 1, this.paging.perPage)
   }
   setItemPerPage(e) {
     console.log(e);
   }
-
+  onPageChange(page: any, perItemOnPage: any) {
+    this.paging.currentPage = page;
+    this.fetchActivities(page, perItemOnPage)
+  }
   isEmpty() {
     if (this.activities.length == 0)
       return true;
     return false;
+  }
+  public showModal(): void {
+    this.orgModal.show();
+  }
+
+  public showModalEdit(activity: any): void {
+    this.currentActivity = activity;
+    this.orgModal.show();
+  }
+
+  public hideModal(): void {
+    this.orgModal.hide();
+  }
+  register() {
+    this.dataRegister.activityId = this.currentActivity.id;
+    this.dataRegister.createdDate = new Date().toDateString();
+    this.dataRegister.joined = true;
+    this.dataRegister.pointSocial = this.currentActivity.pointSocial;
+    this.dataRegister.pointTranning = this.currentActivity.pointTranning;
+
+    this.registerService.create(this.dataRegister).subscribe(
+      data => {
+        let dataJs = data.json();
+        this.addToast("Bạn đã đăng ký hoạt động này", 2000, "success");
+      },
+      error => {
+        let json = error.json();
+        console.log(json);
+        switch (error.status) {
+          case 401: {
+            this.addToast(json.message, 2000, "error");
+          } break;
+          case 404: {
+            this.addToast(json.message, 2000, "error");
+          }; break;
+          case 409: {
+            console.log(json);
+            this.addToast(json.message, 2000, "error");
+          } break;
+          default: this.addToast("Co loi", 2000, "error");
+        }
+      });
+
+
   }
 }

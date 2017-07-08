@@ -140,9 +140,8 @@ export class PostComponent implements OnInit {
     this.dataRegister.userId = this.idUser;
     this.dataRegister.createdDate = new Date().toDateString();
     this.dataRegister.joined = true;
-    this.dataRegister.pointSocial = this.data.pointSocial;
-    this.dataRegister.pointTranning = this.data.pointTranning;
-    this.dataRegister.pointTranning = this.data.pointTranning;
+    this.dataRegister.pointSocial = 0;
+    this.dataRegister.pointTranning = 0;
     if (!this.isRegistered) {
       this.registerService.create(this.dataRegister).subscribe(
         data => {

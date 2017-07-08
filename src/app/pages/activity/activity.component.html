@@ -77,12 +77,13 @@
       </div>
     </div>
   </div>
+  <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
   <div class="row" style="padding-top: 20px">
     <div class="col-lg-12 col-md-12">
       <div style="text-align: center">
         <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
         <!--<pagination-controls class="pagination" (pageChange)="getPage($event)" id="server"></pagination-controls>-->
-        <pagination-controls class="pagination" previousLabel=" " nextLabel=" " (pageChange)="getPage($event)" id="server"></pagination-controls>
+
       </div>
     </div>
   </div>
