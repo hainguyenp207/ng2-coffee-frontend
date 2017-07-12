@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, AuthenticationService } from 'app/_services/index';
+import { User } from 'app/_models/index';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,8 @@ import { AlertService, AuthenticationService } from 'app/_services/index';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model: any = {};
-  loading = false;
+  user: User = new User;
+  loading: boolean = false;
   returnUrl: string;
 
   constructor(
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.loading = true;
-    this.authenticationService.login(this.model.username, this.model.password)
+    this.authenticationService.login(this.user.username, this.user.password)
       .subscribe(
       data => {
         console.log("Return url", this.returnUrl);

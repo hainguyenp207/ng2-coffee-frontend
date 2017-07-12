@@ -12,17 +12,8 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
 })
 
 export class UsersComponent implements OnInit {
-  users = null;
-  user: any = {};
-  orgs = null;
-  roles: any = [];
-  closeResult: string;
-  rolesUser: any = [];
-  dataRole: any = {};
-  dataRoles: any = [];
-  permissions = [];
+  users: any;
   currentPermission: any = {};
-  i: Number = 0;
   paging: any = {
     currentPage: 0,
     total: 0,
@@ -42,7 +33,6 @@ export class UsersComponent implements OnInit {
     if (data) {
       let dataJs = JSON.parse(data);
       let permissionJs = JSON.parse(permission);
-      this.permissions = dataJs.permissions;
       this.currentPermission = permissionJs;
     } else {
       this.router.navigateByUrl("/login");
@@ -93,44 +83,8 @@ export class UsersComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.userService.getAll().subscribe(
-      data => {
-        this.users = data.json();
-      },
-      error => {
-        let errorSV = error.json();
-        if (errorSV) {
-          if (errorSV.code) {
-            let message = errorSV.message;
-            this.addToast(message, 4000, "error");
-          }
-        }
-        // if (error.status == 401) {
-        //   setTimeout(() => {
-        //     this.router.navigateByUrl("/login");
-        //   }, 3000);
-        // }
-      });
     this.countUser();
     this.fetchUser(0, 10);
-    this.roleService.getAll().subscribe(
-      data => {
-        this.roles = data.json();
-      },
-      error => {
-        let errorSV = error.json();
-        if (errorSV) {
-          if (errorSV.code) {
-            let message = errorSV.message;
-            this.addToast(message, 4000, "error");
-          }
-        }
-        if (error.status == 401) {
-          setTimeout(() => {
-            this.router.navigateByUrl("/login");
-          }, 3000);
-        }
-      });
   }
   fetchUser(page: Number, perPage: Number) {
     if (this.isFullPermission()) {
@@ -237,34 +191,6 @@ export class UsersComponent implements OnInit {
       return ['/pages/cbd/activities/edit/' + userId];
     }
     return ''
-  }
-  createUser() {
-    this.userService.create(this.user).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        if (error.status == 401) {
-          console.log("Chua dang nhap");
-        }
-      });
-  }
-  addRole() {
-    let roleSelected = this.dataRole;
-
-    this.dataRoles.push(this.dataRole);
-  }
-  getRoleName(roleId: string) {
-    let roleSelected = this.roles.filter(role => {
-      return role["id"] === roleId;
-    });
-    return roleSelected[0].name;
-  }
-  getOrgName(orgId: string) {
-    let orgSelected = this.orgs.filter(org => {
-      return org["id"] === orgId;
-    });
-    return orgSelected[0].name;
   }
 }
 

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+  <div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
     <div class="card-box" style="font-size: 12pt">
       <ng2-toasty [position]="'top-right'"></ng2-toasty>
       <div class="custom-modal-text text-left">
@@ -48,7 +48,7 @@
           <div class="row">
             <div class="col-md-5 col-xs-5">
               <div class="form-group">
-                <label class="col-md-3 col-sm-3">Tổ chức</label>
+                <label>Tổ chức</label>
                 <select #selectedOrg name="orgId" class="form-control selectpicker" data-style="btn-white">
                 <option *ngFor="let org of orgs" value="{{org.id}}">{{org.name}}</option>
               </select>

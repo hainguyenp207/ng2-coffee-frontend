@@ -11,7 +11,7 @@
         <app-alert></app-alert>
         <div class="form-group ">
           <div class="col-xs-12">
-            <input name="username" [ngClass]="{ 'parsley-error': f.submitted && !username.valid }" class="form-control" [(ngModel)]="model.username"
+            <input name="username" [ngClass]="{ 'parsley-error': f.submitted && !username.valid }" class="form-control" [(ngModel)]="user.username"
               #username="ngModel" type="text" required="" placeholder="Tên đăng nhập">
             <ul *ngIf="f.submitted && !username.valid" class="parsley-errors-list filled" id="parsley-id-5">
               <li class="parsley-required">Tên đăng nhập không được để trống.</li>
@@ -21,7 +21,7 @@
 
         <div class="form-group">
           <div class="col-xs-12">
-            <input name="password" class="form-control" [ngClass]="{ 'parsley-error': f.submitted && !password.valid }" [(ngModel)]="model.password"
+            <input name="password" class="form-control" [ngClass]="{ 'parsley-error': f.submitted && !password.valid }" [(ngModel)]="user.password"
               #password="ngModel" type="password" required="" placeholder="Mật khẩu">
             <ul *ngIf="f.submitted && !password.valid" class="parsley-errors-list filled" id="parsley-id-5">
               <li class="parsley-required">Mật khẩu không được để trống.</li>
