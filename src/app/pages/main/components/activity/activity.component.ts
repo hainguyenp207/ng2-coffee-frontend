@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Activity } from "app/_models/index";
+import {BACKEND_IMG} from "app/_constants/config-envoriment"
 
 @Component({
   selector: 'main-activity',
@@ -37,8 +38,8 @@ export class ActivityComponent implements OnInit {
   }
   getLinkImg(fileName: string) {
     if (fileName)
-      return "https://backend-social.herokuapp.com/files/" + fileName;
-    return "https://backend-social.herokuapp.com/files/hcmute.png";
+      return BACKEND_IMG + fileName;
+    return BACKEND_IMG+"hcmute.png";
   }
 
 

@@ -46,24 +46,26 @@ export class PostComponent implements OnInit {
     };
     fb.init(initParams);
     this.toastyConfig.theme = 'material';
-    try {
-      let data = JSON.parse(localStorage.getItem("data"));
-      this.idUser = data.username;
-      this.token = localStorage.getItem("token");
       this.router.events.subscribe((val) => {
+        
         // see also 
         if (val instanceof NavigationEnd) {
           this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.fetchActivity(this.id);
-            if (this.idUser)
+   this.fetchActivity(this.id);
+            try {
+      let data = JSON.parse(localStorage.getItem("data"));
+      this.idUser = data.username;
+      this.token = localStorage.getItem("token");
+    if (this.idUser)
               this.checkUserRegisteredActivity(this.id, this.idUser);
-          });
-        }
-      });
     } catch (e) {
 
     }
+          });
+        }
+      });
+   
 
   }
 
@@ -136,6 +138,10 @@ export class PostComponent implements OnInit {
     return this.data.canRegister
   }
   register(id: any) {
+    if(!this.token){
+      this.router.navigateByUrl('/login');
+      return;
+    }
     this.dataRegister.activityId = id;
     this.dataRegister.userId = this.idUser;
     this.dataRegister.createdDate = new Date().toDateString();

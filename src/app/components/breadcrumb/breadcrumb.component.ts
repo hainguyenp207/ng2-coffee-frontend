@@ -37,6 +37,10 @@ export class BreadcrumbComponent implements OnInit {
           this.title = "Quản lý tổ chức";
           this.sub = "Tổ chức"
         }
+        else if (val.url.includes("/profile")) {
+          this.title = "Thông tin cá nhân";
+          this.sub = "Tài khoản"
+        }
       }
     });
   }

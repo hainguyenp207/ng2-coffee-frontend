@@ -1,30 +1,30 @@
-<div class=" col-md-8">
-  <div class="card-box">
+<div class="col-md-6 col-md-offset-3">
+        <ng2-toasty [position]="'top-right'"></ng2-toasty>
+  <div class="card-box" style="padding: 40px">
     <form role="form">
       <div class="form-group">
         <label for="name">Họ tên</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="name" placeholder="Nhập họ tên">
-          <span class="input-group-addon bg-custom b-0 text-white"><fa class="fa fa-user"></fa></span>
+          <input name="name" [(ngModel)]="user.name" type="text" class="form-control" id="name" placeholder="Nhập họ tên">
+          <span class="input-group-addon bg-custom b-0 text-white">
+            <fa class="fa fa-user"></fa></span>
         </div>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email</label>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Nhập email">
+          <input type="text" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Nhập email">
           <span class="input-group-addon bg-custom b-0 text-white"><i class="fa fa-envelope"></i></span>
         </div>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Mật khẩu</label>
         <div class="input-group">
-          <input type="password" class="form-control" placeholder="Nhập mật khẩu">
+          <input type="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nhập mật khẩu">
           <span class="input-group-addon bg-custom b-0 text-white"><i class="fa fa-key"></i></span>
         </div>
       </div>
-
-
-      <button type="submit" class="btn btn-default waves-effect waves-light">Lưu</button>
+      <button type="submit" (click)="updateUser()" class="btn btn-default waves-effect waves-light">Lưu</button>
       <button type="button" class="btn btn-danger waves-effect waves-light m-l-10">Hủy</button>
     </form>
   </div>

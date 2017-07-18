@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Activity } from "app/_models/index";
-
+import {BACKEND_IMG} from "app/_constants/config-envoriment"
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.component.html',
@@ -171,7 +171,7 @@ export class ActivityComponent implements OnInit {
     this.orgModal.hide();
   }
   getLinkImg(fileName: string) {
-    return "https://backend-social.herokuapp.com/files/" + fileName;
+    return BACKEND_IMG + fileName;
   }
   addToast(message, timeOut, type) {
     // Or create the instance of ToastOptions

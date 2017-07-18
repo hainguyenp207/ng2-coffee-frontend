@@ -5,7 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { CfToastComponent } from 'app/components/cf-toast/cf-toast.component';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
-
+import {BACKEND_IMG} from "app/_constants/config-envoriment"
 
 @Component({
   selector: 'app-activity-management',
@@ -84,7 +84,7 @@ export class ActivityManagementComponent implements OnInit {
   }
   getLinkImg(fileName: string) {
     if (fileName)
-      return "https://backend-social.herokuapp.com/files/" + fileName;
-    return "https://backend-social.herokuapp.com/files/hcmute.png";
+      return BACKEND_IMG + fileName;
+    return BACKEND_IMG+"hcmute.png";
   }
 }

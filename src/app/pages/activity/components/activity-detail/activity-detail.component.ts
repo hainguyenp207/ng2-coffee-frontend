@@ -16,7 +16,7 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
 import { Subject, Observable, Subscription } from 'rxjs/Rx';
 import { LoadingAnimateService } from 'ng2-loading-animate';
 import * as moment from 'moment';
-
+import {BACKEND_IMG} from 'app/_constants/config-envoriment'
 import 'tinymce';
 import 'tinymce/themes/modern';
 import 'tinymce/plugins/paste';
@@ -344,7 +344,7 @@ export class ActivityDetailComponent implements OnInit, AfterViewInit, OnDestroy
   }
   getLinkImg(fileName: string) {
     if (fileName)
-      return "https://backend-social.herokuapp.com/files/" + fileName;
-    return "https://backend-social.herokuapp.com/files/hcmute.png";
+      return BACKEND_IMG + fileName;
+    return BACKEND_IMG+"hcmute.png";
   }
 }

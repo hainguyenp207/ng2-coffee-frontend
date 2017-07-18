@@ -4,5 +4,5 @@ export class User {
     name: string;
     email: string;
     facultyid?: string;
-    userOrgForm: Array<{}>
+    userOrgForm?: Array<{}>
 }

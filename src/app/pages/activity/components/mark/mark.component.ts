@@ -3,6 +3,7 @@ import { ActivityService, RegisterService } from 'app/_services/index';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 import { Register, Activity } from 'app/_models/index';
+import {BACKEND_IMG} from 'app/_constants/config-envoriment'
 @Component({
   selector: 'app-mark',
   templateUrl: './mark.component.html',
@@ -150,8 +151,8 @@ export class MarkComponent implements OnInit {
     return (this.registers.length === 0) ? true : false;
   }
   getLinkImg(fileName: string) {
-    if (fileName)
-      return "https://backend-social.herokuapp.com/files/" + fileName;
-    return "https://backend-social.herokuapp.com/files/hcmute.png";
+   if (fileName)
+      return BACKEND_IMG + fileName;
+    return BACKEND_IMG+"hcmute.png";
   }
 }

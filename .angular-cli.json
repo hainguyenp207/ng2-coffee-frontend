@@ -12,7 +12,7 @@
         "assets",
         "favicon.ico"
       ],
-      "index": "index.html",
+      "index": "dashboard.html",
       "main": "dashboard.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
